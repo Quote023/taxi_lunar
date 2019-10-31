@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1572550418 source:c:\users\rayhene\desktop\moon-buggy\game\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+
