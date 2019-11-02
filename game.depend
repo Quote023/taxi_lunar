@@ -4,3 +4,14 @@
 	<stdlib.h>
 	<conio.h>
 
+1572704198 source:e:\_projetos\poli\lpi\fusca_lunar\crctrl.c
+	<windows.h>
+
+1572704380 source:e:\_projetos\poli\lpi\fusca_lunar\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"crctrl.h"
+
+1572704360 e:\_projetos\poli\lpi\fusca_lunar\crctrl.h
+

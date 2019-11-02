@@ -1,26 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include "crctrl.h" //funcão GOTOXY
 
-int main(void)
+
+
+int Menu()
 {
     unsigned char opcao;
+    
+    int centroX = TermMax('X') / 2;
+    int centroY = TermMax('Y') / 2;
 
-    printf("\n\n\n\n\n\t\t\t\t\t\tMOON\n\t\t\t\t\t\tBUGGY\n\n\n\n\n");
-
+    gotoxy(centroX, centroY/1.5f - 1);
+    printf("MOON");
+    gotoxy(centroX - 3,centroY/1.5f);
+    printf("BUGGY");
+    
+    printf("\n\n\n\n");
     printf("\t\t\t\t\t  PRESS 1 TO PLAY\n");
     printf("\t\t\t\t\tPRESS 2 TO CONTROLS\n");
     printf("\t\t\t\t\t  PRESS 3 CREDITS\n");
-
-    printf("\n\n\n\n");
-
+    
     do
     {
         opcao = getch();
-
     }
     while(opcao != '0' && opcao != '1' && opcao != '2' && opcao != '3');
-
+    
+    printf("\a\n"); //Som de beep, trocar depois
+    
     switch(opcao)
     {
     case '0':
@@ -40,5 +49,13 @@ int main(void)
         printf("creditosss");
         break;
     }
+
+    return 0;
+}
+
+
+int main(void)
+{
+    Menu();
     return 0;
 }
