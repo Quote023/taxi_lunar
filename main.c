@@ -1,34 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <math.h>
 #include "crctrl.h" //funcão GOTOXY
+#include "game.h"
 
 
 
-int Menu()
+int menu()
 {
     unsigned char opcao;
-    
-    int centroX = TermMax('X') / 2;
-    int centroY = TermMax('Y') / 2;
+    unsigned short centroX = consoleInfo('X')/2,centroY = consoleInfo('Y')/2;
 
-    gotoxy(centroX, centroY/1.5f - 1);
+    const char *nome[] = {
+
+    " _____ _  __  _____       ",
+    "|_   _/_\\ \\ \\/ |_ _|      ",
+    "  | |/ _ \\ >  < | |       ",
+    " _|_/_/ \\_/_/\\_|___|      ",
+    "",
+    "                      ___ ",
+    "| | | | | | \\| | /_\\ | _ \\",
+    "| |_| |_| | .` |/ _ \\|   /",
+    "|____\\___/|_|\\_/_/ \\_|_|_\\"
+                                              
+    };
+
+
+    gotoxy(-3, centroY/2);
     printf("MOON");
-    gotoxy(centroX - 3,centroY/1.5f);
+    gotoxy(0,  centroY/2 - 1);
     printf("BUGGY");
-    
-    printf("\n\n\n\n");
-    printf("\t\t\t\t\t  PRESS 1 TO PLAY\n");
-    printf("\t\t\t\t\tPRESS 2 TO CONTROLS\n");
-    printf("\t\t\t\t\t  PRESS 3 CREDITS\n");
-    
+
+
+
+    gotoxy(0,centroY/4); printf("\n");
+    crmove(centroX - 9,0);
+    printf("PRESS 1 TO    START\n");
+    crmove(centroX - 9,0);
+    printf("PRESS 2 TO  OPTIONS\n");
+    crmove(centroX - 9,0);
+    printf("PRESS 3 TO CONTROLS\n");
+
+
+       
+    gotoxy(-1,0); printf("XXX");  gotoxy(0,1); printf("X");  gotoxy(0,-1); printf("X");
     do
     {
         opcao = getch();
     }
     while(opcao != '0' && opcao != '1' && opcao != '2' && opcao != '3');
     
-    printf("\a\n"); //Som de beep, trocar depois
+    //printf("\a\n"); //Som de beep, trocar depois
     
     switch(opcao)
     {
@@ -49,13 +72,16 @@ int Menu()
         printf("creditosss");
         break;
     }
-
+    
     return 0;
 }
 
 
 int main(void)
 {
-    Menu();
+    //system("MODE con: cols=45 lines=15");
+    consoleInfo('s');
+    setup();
+    menu();
     return 0;
 }
