@@ -4,13 +4,18 @@
 //Tamanho minimo da tela
 #define minY 44
 #define minX 78
-
+  
+  
+  unsigned int x = 0,y = 0,d = 0;
+  int flag = 0;
+  
 /* 
   X -> TamanhoMax em X,
   Y -> Tamanho Max em Y,
   H -> Horizontal: Pos Atual em X (Independente do Centro),
   V -> Vertical:   Pos Atual em Y (Independente do Centro),
   S -> Setup:      Responsividade: Ajusta o tamanho da tela e do Buffer p/ tira as barras de rolagem. Chamar pelo menos no inicio.
+  C -> Check:      Retorna != 0 se o tamanho tiver mudado.
 */
 int consoleInfo(unsigned char c) 
 {
@@ -21,8 +26,11 @@ int consoleInfo(unsigned char c)
 
   SMALL_RECT scrSize;    //4 Variaveis mas só duas(Bottom e Right) importam porque o tamanho é na diagonal
   COORD bufferSize;      //Vetor R2
-  unsigned short r = -1; //Variavel de retorno
-
+  unsigned char tmpC;
+  short r = -1; //Variavel de retorno
+  unsigned int tmpD = 0;
+ 
+  tmpC = c;
 
 // V Aponta para o terminal atual; V
   //Abre o arquivo de nome CNOUT$(Console Output) com acesso para leitura e escrita e compartilhamento
@@ -39,15 +47,36 @@ int consoleInfo(unsigned char c)
  
 
   scrSize = info.srWindow;
+  x = abs(scrSize.Right - scrSize.Left + 1);
+  y = abs(scrSize.Bottom - scrSize.Top + 1);
+  tmpD = sqrt(pow(x,2) + pow(y,2));
+
+  if(tmpD != d)
+  {
+    if(c != 'c' && c != 'C' && c != 66)
+    flag = -10;
+
+    c = 's';   
+    
+  }
+  
 
   switch (c)
   {
+  case 'c': case 'C': case 66:
+    
+    if(flag == -10)
+    {r = -10;}
+    else
+    {r = 0;}
+    flag = 0;
+    break;
   /* */
   case 'x': case 'X': case 0: 
-    r = abs(scrSize.Right - scrSize.Left + 1);
+    r = x;
     break;
   case 'Y': case 'y': case 1:
-    r = abs(scrSize.Bottom - scrSize.Top + 1);
+    r = y;
     break;
   /* */
   case 'v': case 'V': case 2:
@@ -60,7 +89,7 @@ int consoleInfo(unsigned char c)
   case 'S': case 's': case 190:
     
      
-    if(abs(scrSize.Right - scrSize.Left + 1) < minX || abs(scrSize.Bottom - scrSize.Top + 1) < minY)
+    if(x <= minX || y <= minY)
       {
         scrSize.Right  = minX;
         scrSize.Bottom = minY;
@@ -68,16 +97,14 @@ int consoleInfo(unsigned char c)
         scrSize.Top    = 0;
       }
 
-/*
-    if( info.dwSize.Y % 2 != 0) 
-      {scrSize.Bottom -= 1; scrSize.Top = 0;}
-    if(abs(info.dwSize.X % 2 != 0))
-      {scrSize.Right -= 1;  scrSize.Left = 0;}
-*/
-    
+
     bufferSize.X = scrSize.Right  + 1;
     bufferSize.Y = scrSize.Bottom + 1;
     
+    x = abs(scrSize.Right - scrSize.Left + 1);
+    y = abs(scrSize.Bottom - scrSize.Top + 1);
+    d = sqrt(pow(x,2) + pow(y,2));
+    r = d;
 
     SetConsoleScreenBufferSize(console,bufferSize); //Tamanho do buffer (sempre tem que ser >= o da janela, por isso setado duas vezes);
     SetConsoleWindowInfo(console, 1, &scrSize);     //Tamanho da janela;
@@ -86,13 +113,16 @@ int consoleInfo(unsigned char c)
     break;
   /* */
   default:
+    CloseHandle(console);
     return -1;
     break;
   }
 
   CloseHandle(console);  //Fecha o acesso ao console p/ liberar espaço para outras aplicações que possam usar ele;
 
-
+  if(tmpC != c && tmpC!= 'S' && tmpC != 's' && tmpC != 190)
+  return consoleInfo(tmpC);
+  else  
   return  r;
 
 }
