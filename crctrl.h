@@ -3,7 +3,7 @@
 
 
 int consoleInfo(char c);
-//int consoleSet();
+int textcolor(int color);
 int gotoxy(int x,int y);
 int crmove(int x, int y);
 

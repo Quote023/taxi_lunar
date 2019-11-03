@@ -5,7 +5,14 @@
 #define minY 44
 #define minX 60
   
+int textcolor(int color)
+{
+    HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(h, color);
+    return 0;
+}
   
+ 
   unsigned int x = 0,y = 0,d = 0;
   int flag = 0;
   
@@ -135,8 +142,6 @@ int consoleInfo(unsigned char c)
 
 }
 
-
-
 /*
   gotoxy(int x, int y):
   Move o Cursor até a posição
@@ -168,12 +173,15 @@ int crmove(int x, int y)
 {
   COORD coord; //Vetor R2
   
-  x = consoleInfo('H') + x - 1; //PosAtual em X + x;
-  y = consoleInfo('V') + y; //PosAtual em Y + Y;
+  x = consoleInfo('H') + x; //PosAtual em X + x;
+  y = consoleInfo('V') - y; //PosAtual em Y + Y;
   
 
   coord.X = x;
   coord.Y = y;
+
+  if(y > consoleInfo('Y'))
+   return -1;
 
   SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord); //Seta a posição do cursor dentro do console padrão
   
