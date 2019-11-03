@@ -15,3 +15,17 @@
 
 1572704360 e:\_projetos\poli\lpi\fusca_lunar\crctrl.h
 
+1572789433 source:e:\_projetos\poli\lpi\taxi_lunar\crctrl.c
+	<windows.h>
+	<math.h>
+
+1572720153 source:e:\_projetos\poli\lpi\taxi_lunar\game.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"crctrl.h"
+
+1572737040 e:\_projetos\poli\lpi\taxi_lunar\crctrl.h
+
+1572720022 source:e:\_projetos\poli\lpi\taxi_lunar\tempcoderunnerfile.c
+

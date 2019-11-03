@@ -3,7 +3,7 @@
 
 //Tamanho minimo da tela
 #define minY 44
-#define minX 78
+#define minX 60
   
   
   unsigned int x = 0,y = 0,d = 0;
@@ -89,13 +89,21 @@ int consoleInfo(unsigned char c)
   case 'S': case 's': case 190:
     
      
-    if(x <= minX || y <= minY)
+    if(x <= minX )
       {
         scrSize.Right  = minX;
-        scrSize.Bottom = minY;
+        scrSize.Bottom = !scrSize.Bottom % 2 ? scrSize.Bottom : scrSize.Bottom + 1;
         scrSize.Left   = 0;
         scrSize.Top    = 0;
       }
+    
+    if(y <= minY )
+        {
+          scrSize.Right  = !scrSize.Right % 2 ? scrSize.Right : scrSize.Right + 1;
+          scrSize.Bottom = minY;
+          scrSize.Left   = 0;
+          scrSize.Top    = 0;
+        }
 
 
     bufferSize.X = scrSize.Right  + 1;
@@ -129,7 +137,11 @@ int consoleInfo(unsigned char c)
 
 
 
-
+/*
+  gotoxy(int x, int y):
+  Move o Cursor até a posição
+  relativa ao centro da tela.
+*/
 int gotoxy(int x, int y)
 {
   COORD coord; //Vetor R2
@@ -147,6 +159,11 @@ int gotoxy(int x, int y)
   return 0;
 }
 
+/*
+  crmove(int x, int y):
+  Move o Cursor até a posição
+  relativa à posição atual.
+*/
 int crmove(int x, int y)
 {
   COORD coord; //Vetor R2

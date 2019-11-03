@@ -59,12 +59,12 @@ int menu()
                 { 
                     Sleep(200);
                     gotoxy(-7,-centroY/2);
-                    printf("INSERT   COIN");
+                    printf("INSERT 1 COIN");
                 }else
                 {      
                     Sleep(200);
                     gotoxy(-7,-centroY/2);
-                    printf("             ");
+                    printf("               ");
                 }
                 if(consoleInfo('C') == -10) //Caso o tamanho mude
                 {
