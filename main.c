@@ -14,7 +14,7 @@ int menu()
 {
     unsigned char opcao;
     unsigned short centroX = consoleInfo('X')/2,centroY = consoleInfo('Y')/2;
-    
+
     int i = 0,j = 0;
 
     const char *nome[] = {
@@ -28,18 +28,18 @@ int menu()
     "| |  | | | | \\| | /_\\ | _ \\",
     "| |_ | |_| | .` |/ _ \\|   /",
     "|___|\\____/|_|\\_/_/ \\_|_|_\\"
-                                              
+
     };
-    
+
     const char *car[] = {
     //\u2587\u2587
     " oMMMo ",
     "(/) (\\)",
-           
+
     };
     textcolor(59);
     gotoxy(0,-centroY + 5);
-    elipse(centroX - 5,centroY,0,'O');
+    elipse(centroX - 5,centroY,0,' ');
     textcolor(7);
 
     gotoxy(-13, centroY/1.5f + 1);
@@ -66,13 +66,13 @@ int menu()
     for(j = 0; j <(consoleInfo('Y') - consoleInfo('V')) + 4 ;j++)
     {
         for(i = 0; i < centroX * 2 - 1;i++)
-        {crmove(1,0); printf("X"); crmove(-1,0);}
+        {printf("X");}
         printf("\n\r");
     }
-    
-       
+
+
    // gotoxy(-1,0); printf("XXX");  gotoxy(0,1); printf("X");  gotoxy(0,-1); printf("X"); gotoxy(0,-centroY/2 + 1); printf("X");
-    
+
     do
     {
         if(kbhit())
@@ -80,18 +80,18 @@ int menu()
         else
         {
                  if(!(j % 2))
-                { 
+                {
                     textcolor(63);
                     Sleep(200);
                     gotoxy(-7,-centroY/2);
                     printf("INSERT 1 COIN");
                      textcolor(7);
                 }else
-                {      
-                    textcolor(63);
+                {
+                    textcolor(59);
                     Sleep(200);
                     gotoxy(-7,-centroY/2);
-                    printf("OOOOOOOOOOOOOO");
+                    printf("              ");
                      textcolor(7);
                 }
                 if(consoleInfo('C') == -10) //Caso o tamanho mude
@@ -105,7 +105,7 @@ int menu()
     while(opcao != '0' && opcao != '1' && opcao != '2' && opcao != '3');
      textcolor(7);
     //printf("\a\n"); //Som de beep, trocar depois
-    
+
     switch(opcao)
     {
     case '0':
@@ -125,7 +125,7 @@ int menu()
         printf("creditosss");
         break;
     }
-    
+
     return 0;
 }
 
@@ -141,15 +141,15 @@ int printtaxi()
 int main(void)
 {
     setlocale(LC_ALL, "");
-   
+
 
     consoleInfo('s');
     //setup();
     menu();
    // gotoxy(-1,0); printf("XXX");  gotoxy(0,1); printf("X");  gotoxy(0,-1); printf("X");
-    
-   
-    
+
+
+
     getchar();
     return 0;
 }
