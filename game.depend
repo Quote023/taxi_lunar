@@ -29,7 +29,7 @@
 
 1572720022 source:e:\_projetos\poli\lpi\taxi_lunar\tempcoderunnerfile.c
 
-1572904751 source:e:\_projetos\poli\lpi\taxi_lunar\main.c
+1572904912 source:e:\_projetos\poli\lpi\taxi_lunar\main.c
 	<stdio.h>
 	<locale.h>
 	<stdlib.h>
@@ -45,7 +45,7 @@
 1572816667 e:\_projetos\poli\lpi\taxi_lunar\ascii.h
 	<math.h>
 
-1572904621 source:e:\_projetos\poli\lpi\taxi_lunar\ascii.c
+1572904884 source:e:\_projetos\poli\lpi\taxi_lunar\ascii.c
 	<stdio.h>
 	<math.h>
 	"crctrl.h"
