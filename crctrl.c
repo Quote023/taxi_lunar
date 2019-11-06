@@ -27,8 +27,7 @@ int textcolor(int color)
 int consoleInfo(unsigned char c) 
 {
 
-  HANDLE console;        //Variavel que acessa algo do sistema(no Caso o console);
-
+  HANDLE console;                   //Variavel que acessa algo do sistema(no Caso o console);
   CONSOLE_SCREEN_BUFFER_INFO info; //Struct que guarda informações (tamanho,posição do cursor, etc) de um console; V
 
   SMALL_RECT scrSize;    //4 Variaveis mas só duas(Bottom e Right) importam porque o tamanho é na diagonal
@@ -41,7 +40,7 @@ int consoleInfo(unsigned char c)
 
 // V Aponta para o terminal atual; V
   //Abre o arquivo de nome CNOUT$(Console Output) com acesso para leitura e escrita e compartilhamento
-  console = CreateFileW(L"CONOUT$", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
+  console = CreateConsoleScreenBuffer(L"CONOUT$", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
    NULL, OPEN_EXISTING,0, NULL); //getstdhandle não funcionou idkwhy.
   //OPEN_EXISTING = Só tentar abrir se o console existir;
   

@@ -31,7 +31,22 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="ascii.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="ascii.h" />
+		<Unit filename="crctrl.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="crctrl.h" />
+		<Unit filename="game.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="game.h" />
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="tempCodeRunnerFile.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

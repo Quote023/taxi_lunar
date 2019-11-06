@@ -23,7 +23,7 @@ int menu()
     "   |_   _/_\\ \\ \\/ |_ _|",
     "     | |/ _ \\ >  < | |",
     "     |_/_/ \\_/_/\\_|___|",
-    " ",
+    "",
     " _    __ __ _  __  _   ___  ",
     "| |  | | | | \\| | /_\\ | _ \\",
     "| |_ | |_| | .` |/ _ \\|   /",
@@ -37,9 +37,12 @@ int menu()
     "(/) (\\)",
 
     };
+
+    
+
     textcolor(59);
     gotoxy(0,-centroY + 5);
-    elipse(centroX - 5,centroY,0,' ');
+    elipse(centroX - 4,centroY,0,' ');
     textcolor(7);
 
     gotoxy(-13, centroY/1.5f + 1);
@@ -63,15 +66,23 @@ int menu()
     gotoxy(-centroX + 15,-centroY/1.5f - 1);
     puts (car[1]);
     crmove(-15,-1);
+
+    textcolor(119);
     for(j = 0; j <(consoleInfo('Y') - consoleInfo('V')) + 4 ;j++)
     {
+
         for(i = 0; i < centroX * 2 - 1;i++)
         {printf("X");}
         printf("\n\r");
     }
+    textcolor(7);
 
 
    // gotoxy(-1,0); printf("XXX");  gotoxy(0,1); printf("X");  gotoxy(0,-1); printf("X"); gotoxy(0,-centroY/2 + 1); printf("X");
+
+    gotoxy(-consoleInfo('X'),-consoleInfo('Y'));
+    for(i = 0; i < consoleInfo('Y')*2 + 1;i++)
+    printf("A");
 
     do
     {

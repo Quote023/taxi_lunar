@@ -32,7 +32,7 @@ int elipse(int X,int Y,short f,char fill)
 {
 
     int i,j,maior;//,menor;
-   // int k = consoleInfo('Y');
+    int k = consoleInfo('Y');
 
      if(X > Y){ maior = X;} //crmove(-X,Y);
      else { maior = Y;} //crmove(-Y,X);
@@ -49,8 +49,8 @@ int elipse(int X,int Y,short f,char fill)
             else
             crmove(1,0);
         }
+        if(consoleInfo('V') >= k) break;
         if(crmove(-X*2 - 1,-1)) break;
-        // if(consoleInfo('V') >= consoleInfo('Y')) break;
     }
 
     gotoxy(0,0);
