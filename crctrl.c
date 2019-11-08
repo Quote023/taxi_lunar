@@ -13,8 +13,7 @@ int textcolor(int color)
 }
   
  
-  unsigned int x = 0,y = 0,d = 0;
-  int flag = 0;
+  
   
 /* 
   X -> TamanhoMax em X,
@@ -26,6 +25,10 @@ int textcolor(int color)
 */
 int consoleInfo(unsigned char c) 
 {
+  static int flag = 0;
+  static unsigned int x = 0,y = 0,d = 0;
+  unsigned int tmpD = 0;
+ 
 
   HANDLE console;                   //Variavel que acessa algo do sistema(no Caso o console);
   CONSOLE_SCREEN_BUFFER_INFO info; //Struct que guarda informações (tamanho,posição do cursor, etc) de um console; V
@@ -34,13 +37,12 @@ int consoleInfo(unsigned char c)
   COORD bufferSize;      //Vetor R2
   unsigned char tmpC;
   short r = -1; //Variavel de retorno
-  unsigned int tmpD = 0;
- 
+
   tmpC = c;
 
 // V Aponta para o terminal atual; V
   //Abre o arquivo de nome CNOUT$(Console Output) com acesso para leitura e escrita e compartilhamento
-  console = CreateConsoleScreenBuffer(L"CONOUT$", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
+  console = CreateFileW(L"CONOUT$", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
    NULL, OPEN_EXISTING,0, NULL); //getstdhandle não funcionou idkwhy.
   //OPEN_EXISTING = Só tentar abrir se o console existir;
   
@@ -57,6 +59,7 @@ int consoleInfo(unsigned char c)
   y = abs(scrSize.Bottom - scrSize.Top + 1);
   tmpD = sqrt(pow(x,2) + pow(y,2));
 
+  /**
   if(tmpD != d)
   {
     if(c != 'c' && c != 'C' && c != 66)
@@ -65,10 +68,11 @@ int consoleInfo(unsigned char c)
     c = 's';   
     
   }
-  
+  /**/
 
   switch (c)
   {
+  /*
   case 'c': case 'C': case 66:
     
     if(flag == -10)
@@ -91,7 +95,8 @@ int consoleInfo(unsigned char c)
   case 'h': case 'H': case 3:
     r = info.dwCursorPosition.X;
     break;
-  /* */
+  
+  /* 
   case 'S': case 's': case 190:
     
      
@@ -118,12 +123,14 @@ int consoleInfo(unsigned char c)
     x = abs(scrSize.Right - scrSize.Left + 1);
     y = abs(scrSize.Bottom - scrSize.Top + 1);
     d = sqrt(pow(x,2) + pow(y,2));
-    r = d;
 
+    if(d != tmpD)
+    {
     SetConsoleScreenBufferSize(console,bufferSize); //Tamanho do buffer (sempre tem que ser >= o da janela, por isso setado duas vezes);
     SetConsoleWindowInfo(console, 1, &scrSize);     //Tamanho da janela;
     SetConsoleScreenBufferSize(console,bufferSize); //Tamanho do buffer norvamente para remover barras de rolagem.
-
+    }
+        r = d;
     break;
   /* */
   default:

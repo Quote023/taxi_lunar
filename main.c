@@ -11,9 +11,11 @@
 
 
 int menu()
-{
+{   
+
     unsigned char opcao;
     unsigned short centroX = consoleInfo('X')/2,centroY = consoleInfo('Y')/2;
+
 
     int i = 0,j = 0;
 
@@ -38,6 +40,8 @@ int menu()
 
     };
 
+
+   // int array[]={}
     
 
     textcolor(59);
@@ -45,13 +49,18 @@ int menu()
     elipse(centroX - 4,centroY,0,' ');
     textcolor(7);
 
+    
+
+
     gotoxy(-13, centroY/1.5f + 1);
     textcolor(6);
+    
     for(i = 0; i < 9 ; i++ )
     {
         puts(nome[i]);
         gotoxy(-13, centroY/1.5f - i);
     }
+
     textcolor(63);
     gotoxy(0,centroY/4); printf("\n");
     crmove(centroX - 9,0);
@@ -67,22 +76,46 @@ int menu()
     puts (car[1]);
     crmove(-15,-1);
 
-    textcolor(119);
-    for(j = 0; j <(consoleInfo('Y') - consoleInfo('V')) + 4 ;j++)
-    {
+    //gotoxy(-consoleInfo('X')/2,-consoleInfo('Y')/2 + 4);
+    //const char *chao[]= {"   ###################   ##############    ##############    ################    #########     ####################   "};  //joabe eu te amo perdoa a variavel no meio do codigo
 
-        for(i = 0; i < centroX * 2 - 1;i++)
-        {printf("X");}
-        printf("\n\r");
-    }
-    textcolor(7);
+    //puts (chao[0]);
 
+
+    
+
+
+   gotoxy ( -consoleInfo('X')/2,-consoleInfo('Y')/2 + 4);
+   
+   for(i = 0;   i < 4 ; i++)
+   { 
+            for(j = 0;   j < consoleInfo('X') ; j++) 
+        { 
+        
+                
+                if (j%20==0) 
+                {
+                    textcolor(7);
+                    printf(" ");
+                   
+                }
+                else
+                {
+                    textcolor(70);
+                    printf(" ");
+                }
+                  
+
+        }
+    printf("\n");
+
+   }
+   
+
+   
 
    // gotoxy(-1,0); printf("XXX");  gotoxy(0,1); printf("X");  gotoxy(0,-1); printf("X"); gotoxy(0,-centroY/2 + 1); printf("X");
 
-    gotoxy(-consoleInfo('X'),-consoleInfo('Y'));
-    for(i = 0; i < consoleInfo('Y')*2 + 1;i++)
-    printf("A");
 
     do
     {
@@ -96,20 +129,30 @@ int menu()
                     Sleep(200);
                     gotoxy(-7,-centroY/2);
                     printf("INSERT 1 COIN");
-                     textcolor(7);
+                   // textcolor(7);
+                   // gotoxy(centroX/2, centroY/2);
+                   // printf("*");
+                   // gotoxy(centroX/2 + 3, centroY/2 + 3);
+                   // printf("*");
+                   // textcolor(7);
                 }else
                 {
                     textcolor(59);
                     Sleep(200);
                     gotoxy(-7,-centroY/2);
                     printf("              ");
-                     textcolor(7);
+                   // textcolor(7);
+                   // gotoxy(centroX/2, centroY/2);
+                   // printf(" ");
+                   // gotoxy(centroX/2 + 3, centroY/2 + 3);
+                   // printf(" ");
+                   // textcolor(7);
                 }
-                if(consoleInfo('C') == -10) //Caso o tamanho mude
-                {
-                    system("cls");
-                    return menu();
-                }
+               // if(consoleInfo('C') == -10) //Caso o tamanho mude
+               // {
+               //     system("cls");
+               //     return menu();
+               // }
         }
         j++;
     }
@@ -152,9 +195,9 @@ int printtaxi()
 int main(void)
 {
     setlocale(LC_ALL, "");
+    system("MODE con: cols=120 lines=44");
 
-
-    consoleInfo('s');
+    //consoleInfo('s');
     //setup();
     menu();
    // gotoxy(-1,0); printf("XXX");  gotoxy(0,1); printf("X");  gotoxy(0,-1); printf("X");

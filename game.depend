@@ -15,7 +15,7 @@
 
 1572704360 e:\_projetos\poli\lpi\fusca_lunar\crctrl.h
 
-1572823297 source:e:\_projetos\poli\lpi\taxi_lunar\crctrl.c
+1573128877 source:e:\_projetos\poli\lpi\taxi_lunar\crctrl.c
 	<windows.h>
 	<math.h>
 
@@ -29,7 +29,7 @@
 
 1572720022 source:e:\_projetos\poli\lpi\taxi_lunar\tempcoderunnerfile.c
 
-1572905706 source:e:\_projetos\poli\lpi\taxi_lunar\main.c
+1573130650 source:e:\_projetos\poli\lpi\taxi_lunar\main.c
 	<stdio.h>
 	<locale.h>
 	<stdlib.h>
