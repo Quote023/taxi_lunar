@@ -1,5 +1,8 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <windows.h>
 #include <math.h>
+#include <string.h>
 
 //Tamanho minimo da tela
 #define minY 44
@@ -32,15 +35,16 @@ int consoleInfo(unsigned char c)
 
   SMALL_RECT scrSize;    //4 Variaveis mas só duas(Bottom e Right) importam porque o tamanho é na diagonal
   COORD bufferSize;      //Vetor R2
+  char cmd[30] = "";
+  char num[4] = "";
   unsigned char tmpC;
-  short r = -1; //Variavel de retorno
   unsigned int tmpD = 0;
- 
+  short r = -1; //Variavel de retorno
   tmpC = c;
 
 // V Aponta para o terminal atual; V
   //Abre o arquivo de nome CNOUT$(Console Output) com acesso para leitura e escrita e compartilhamento
-  console = CreateConsoleScreenBuffer(L"CONOUT$", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
+  console = CreateFileW(L"CONOUT$", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
    NULL, OPEN_EXISTING,0, NULL); //getstdhandle não funcionou idkwhy.
   //OPEN_EXISTING = Só tentar abrir se o console existir;
   
@@ -120,9 +124,17 @@ int consoleInfo(unsigned char c)
     d = sqrt(pow(x,2) + pow(y,2));
     r = d;
 
-    SetConsoleScreenBufferSize(console,bufferSize); //Tamanho do buffer (sempre tem que ser >= o da janela, por isso setado duas vezes);
-    SetConsoleWindowInfo(console, 1, &scrSize);     //Tamanho da janela;
-    SetConsoleScreenBufferSize(console,bufferSize); //Tamanho do buffer norvamente para remover barras de rolagem.
+    strcat(cmd,"Mode con: cols=");
+    sprintf(num,"%d",x);
+    strcat(cmd,num);
+    strcat(cmd," lines=");
+    sprintf(num,"%d",y);
+    strcat(cmd,num);
+    system(cmd);
+    
+   // SetConsoleScreenBufferSize(console,bufferSize); //Tamanho do buffer (sempre tem que ser >= o da janela, por isso setado duas vezes);
+  //  SetConsoleWindowInfo(console, 1, &scrSize);     //Tamanho da janela;
+   // SetConsoleScreenBufferSize(console,bufferSize); //Tamanho do buffer norvamente para remover barras de rolagem.
 
     break;
   /* */
