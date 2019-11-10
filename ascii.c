@@ -18,14 +18,14 @@ int elipse(int X,int Y,short f,char fill)
        // crmove(,);
       
 
-    for(i = Y - 2; i >= -Y/2 + 2 ;i--)
+    for(i = Y; i >= -Y/2 + 8 ;i--)
     {
         for (j = -X; j <= X + offset/2; j++)
         {
             eX = pow(j,2)/pow(X,2);
             eY = pow(i+5,2)/pow(Y,2);
 
-            if(eX + eY <= 1 )
+            if(eX + eY <= 1 && i != (Y - 5))
             {
                 if(rand()% 100 < 30)    textcolor(34); //Verde
                     else                textcolor(59); //Azul

@@ -8,6 +8,7 @@
 #include "stars.h"
 
 
+
 /*Background(true = printar o chao/false = não printar)*/
  int background(int iFlag)
  {
@@ -50,75 +51,110 @@
     }
     //Chão Inicial
  }
+//
 
-/*jogo(roda)*/
- int jogo(int *wState)
- {
+
+
+int smoke(int state)
+{
     ScreenInfo scr = *getScreen();
-    unsigned short halfX = scr.X/2,halfY = scr.Y/2;
-    int i,offset = scr.X < 92 ? 8 : 0;
+    unsigned short halfX = scr.X/2,halfY = scr.Y/2,offset = scr.X < 92 ? 8 : 0;
 
 
-    Sleep(200);
-    turnWheel(wState);
-    Sleep(150);
-    turnWheel(wState);
-    Sleep(100);
-    turnWheel(wState);
-    Sleep(75);
-    turnWheel(wState);
-    
-    i = 0;
-    while(1 == 1)
-    {
-        Sleep(50);
-        turnWheel(wState);
-        if(i % 2)
+        if(state % 2)
         {
             Sleep(10);
             gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
             printf("  o");
+            
         }
         else
         {
             Sleep(10);
             gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
             printf(" O ");
-
+            
         }
-        if(i % 3 == 0)
+        if(state % 3 == 0)
         {
             Sleep(10);
             gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
             printf("0  "); 
+          
+
         }
-        if(i % 6 == 0)
+        if(state % 6 == 0)
         {
             
             gotoxy(-halfX + 10 - offset/2 - 5,-halfY + 7);
             printf("o "); 
             crmove(-1,-1);
             printf("0");
+           
+
         }
         else   
         {
-            Sleep(10);
+            Sleep(20);
             gotoxy(-halfX + 10 - offset/2 - 5,-halfY + 7);
             printf("  "); 
             crmove(-1,-1);
             printf("  ");
+            
         }
 
-        if(consoleInfo('C') == -10) //Caso o tamanho mude
-        {
 
-            system("cls");
-            showConsoleCursor(0);
-            background(1);
-            return jogo(wState);
+
+    return 0;
+}
+
+/*jogo(roda)*/
+ int jogo(int *wState)
+ {
+    ScreenInfo scr = *getScreen();
+    unsigned short halfX = scr.X/2,halfY = scr.Y/2,offset = scr.X < 92 ? 8 : 0;
+    int i = 0, y = 0;
+    char tecla = 0;
+
+    //Acelerção gradual
+        Sleep(200);
+        turnWheel(wState);
+        Sleep(150);
+        turnWheel(wState);
+        Sleep(100);
+        turnWheel(wState);
+        Sleep(75);
+        turnWheel(wState);
+    //
+
+    while(1)
+    {
+        if(kbhit())
+        {
+            tecla = getch();
+            if(tecla = 32)
+            jump(&y);
         }
         
-        i++;
+        
+
+            if(y == 0)
+            {
+                Sleep(50);
+                turnWheel(wState);
+                smoke(i);
+            }
+           
+
+            if(consoleInfo('C') == -10) //Caso o tamanho mude
+            {
+                system("cls");
+                showConsoleCursor(0);   //Apaga o cursor
+                background(1);          //Redesenha o fundo
+                return jogo(wState);    //Recomeça o jogo
+            }
+            i++;
+               
     }
 
     return 0;
@@ -129,28 +165,32 @@
  int clsMenu()
  {
     ScreenInfo scr = *getScreen();
-    unsigned short halfY = scr.Y/2;
-    int i, offset = scr.X < 92 ? 8 : 0;
+    unsigned short halfY = scr.Y/2,offset = scr.X < 92 ? 8 : 0;
+    int i;
 
+    //Nome
+        gotoxy(-12 + offset, halfY/1.5f + 1);
+        for(i = 0; i < 9 ; i++ )
+        {
+            puts("                             ");
+            gotoxy(-12 + offset, halfY/1.5f - i);
+        }
+    //
 
-    gotoxy(-12 + offset, halfY/1.5f + 1);
-    for(i = 0; i < 9 ; i++ )
-    {
-        puts("                             ");
-        gotoxy(-12 + offset, halfY/1.5f - i);
-    }
-    
-    textcolor(63);
-    //gotoxy(0,halfY/4); printf("\n");
-    gotoxy(-9 + offset,-2);
-    printf("                   \n");
-    gotoxy(-9 + offset,-2);
-    printf("                   \n");
-    gotoxy(-9 + offset,-2);
-    printf("                   \n");
+    //Seleção  
+        textcolor(63);
+        gotoxy(-10 + offset,-1);
+        printf("                    ");
+        gotoxy(-10 + offset,-2);
+        printf("                    ");
+        gotoxy(-10 + offset,-3);
+        printf("                    ");
+    //
 
-    gotoxy(-7,-halfY/2);
-    printf("              ");
+    //Insert Coin
+        gotoxy(-7,-halfY/2);
+        printf("              ");
+    //
 
     return 0;
  }
@@ -163,42 +203,40 @@
     unsigned short halfY = scr.Y/2;
     int i = 0,j = 0,offset = scr.X < 92 ? 8 : 0;
 
-    const char *nome[] = {
+    const char *nome[] = 
+     {
 
-    "    _____ _  __  _____",
-    "   |_   _/_\\ \\ \\/ |_ _|",
-    "     | |/ _ \\ >  < | |",
-    "     |_/_/ \\_/_/\\_|___|",
-    "",
-    " _    __ __ _  __  _   ___  *",
-    "| |  | | | | \\| | /_\\ | _ \\",
-    "| |_ | |_| | .` |/ _ \\|   /",
-    "|___|\\____/|_|\\_/_/ \\_|_|_\\"
+        "    _____ _  __  _____",
+        "   |_   _/_\\ \\ \\/ |_ _|",
+        "     | |/ _ \\ >  < | |",
+        "     |_/_/ \\_/_/\\_|___|",
+        "",
+        " _    __ __ _  __  _   ___  *",
+        "| |  | | | | \\| | /_\\ | _ \\",
+        "| |_ | |_| | .` |/ _ \\|   /",
+        "|___|\\____/|_|\\_/_/ \\_|_|_\\"
 
-    };
-
+     };
+    //
   
     background(1);
-    
-
-
 
     //MENU
-    gotoxy(-12 + offset, halfY/1.5f + 1);
-    textcolor(6);
-    for(i = 0; i < 9 ; i++ )
-    {
-        puts(nome[i]);
-        gotoxy(-12 + offset, halfY/1.5f - i);
-    }
-    textcolor(63);
-    //gotoxy(offset,halfY/4); printf("\n");
-    gotoxy( -9 + offset,-1);
-    printf("PRESS 1 TO    START\n");
-    gotoxy(-9 + offset,-2);
-    printf("PRESS 2 TO  OPTIONS\n");
-    gotoxy(-9 + offset,-3);
-    printf("PRESS 3 TO CONTROLS\n");
+        gotoxy(-12 + offset, halfY/1.5f + 1);
+        textcolor(6);
+        for(i = 0; i < 9 ; i++ )
+        {
+            puts(nome[i]);
+            gotoxy(-12 + offset, halfY/1.5f - i);
+        }
+        
+        textcolor(63);
+        gotoxy( -9 + offset,-1);
+        printf("PRESS 1 TO    START");
+        gotoxy(-9 + offset,-2);
+        printf("PRESS 2 TO  OPTIONS");
+        gotoxy(-9 + offset,-3);
+        printf("PRESS 3 TO CONTROLS");
     //MENU
  
 
@@ -240,14 +278,12 @@
         j++;
     }
     while(sOption != '0' && sOption != '1' && sOption != '2' && sOption != '3');
-     textcolor(7);
-     //printf("\a\n"); //Som de beep, trocar depois
+    textcolor(7);
 
     switch(sOption)
     {
     case '0':
-        system("cls");
-        printf("quitar");
+        system("exit");
         break;
     case '1':
         clsMenu();

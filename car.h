@@ -3,5 +3,6 @@
 
 
 int turnWheel(int *i);
+int jump(int *h);
 
 #endif // CAR_H_INCLUDED
