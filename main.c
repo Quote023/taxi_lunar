@@ -8,10 +8,7 @@
 #include "game.h"
 #include "ascii.h"
 #include "car.h"
-
-
-
-
+#include "stars.h"
 
 
 int main(void)
@@ -21,9 +18,6 @@ int main(void)
     ShowConsoleCursor(0);
     consoleInfo('s');
     menu(&wState);
-   // gotoxy(-1,0); printf("XXX");  gotoxy(0,1); printf("X");  gotoxy(0,-1); printf("X");
-
-
 
     getchar();
     return 0;
