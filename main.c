@@ -7,6 +7,7 @@
 #include "crctrl.h" //funcão GOTOXY
 #include "game.h"
 #include "ascii.h"
+#include "stars.h"
 
 
 
@@ -132,22 +133,24 @@ int menu()
         {
                  if(!(j % 2))
                 {
-                    
+                    /*
                     Sleep(200);
                     girarroda(&wState);
                     textcolor(63);
                     gotoxy(-7,-centroY/2);
                     printf("INSERT 1 COIN");
-                    textcolor(7);
+                    textcolor(7);*/
+                    estrelas1();
                 }else
                 {
                    
-                    Sleep(200);
+                    /*Sleep(200);
                     girarroda(&wState);
                     textcolor(59);
                     gotoxy(-7,-centroY/2);
                     printf("              ");
-                     textcolor(7);
+                     textcolor(7);*/
+                    estrelas2();
                 }
                 if(consoleInfo('C') == -10) //Caso o tamanho mude
                 {
