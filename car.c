@@ -5,8 +5,10 @@
 
 int turnWheel(int *i)
 {
-    unsigned short halfX = consoleInfo('X')/2,halfY = consoleInfo('Y')/2;
-    int offset = consoleInfo('X') < 92 ? 8 : 0;
+    ScreenInfo scr = getScreen();
+    unsigned short halfX = scr.X/2,halfY = scr.Y/2;
+    int offset = scr.X < 92 ? 8 : 0;
+
     textcolor(7);
 
     

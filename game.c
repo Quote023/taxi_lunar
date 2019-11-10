@@ -8,10 +8,12 @@
 #include "stars.h"
 
 
-int background(int iFlag)
-{
-    unsigned short halfX = consoleInfo('X')/2,halfY = consoleInfo('Y')/2;
-    int i = 0,j = 0,offset = consoleInfo('X') < 92 ? 8 : 0;
+/*Background(true = printar o chao/false = não printar)*/
+ int background(int iFlag)
+ {
+    ScreenInfo scr = getScreen();
+    unsigned short halfX = scr.X/2,halfY = scr.Y/2;
+    int i,j,offset = scr.X < 92 ? 8 : 0;
 
     const char *car[] = {
     //\u2587\u2587
@@ -47,33 +49,15 @@ int background(int iFlag)
         textcolor(7);
     }
     //Chão Inicial
-}
+ }
 
+/*jogo(roda)*/
+ int jogo(int *wState)
+ {
+    ScreenInfo scr = getScreen();
+    unsigned short halfX = scr.X/2,halfY = scr.Y/2;
+    int i,j,offset = scr.X < 92 ? 8 : 0;
 
-int jogo(int *wState)
-{
-    unsigned short halfX = consoleInfo('X')/2,halfY = consoleInfo('Y')/2;
-    int i,j, offset = consoleInfo('X') < 92 ? 8 : 0;
-
-    
-    gotoxy(-12 + offset, halfY/1.5f + 1);
-     for(i = 0; i < 9 ; i++ )
-    {
-        puts("                             ");
-        gotoxy(-12 + offset, halfY/1.5f - i);
-    }
-    
-    textcolor(63);
-    gotoxy(0,halfY/4); printf("\n");
-    crmove(halfX + offset - 9,0);
-    printf("                   \n");
-    crmove(halfX + offset - 9,0);
-    printf("                   \n");
-    crmove(halfX + offset - 9,0);
-    printf("                   \n");
-
-    gotoxy(-7,-halfY/2);
-    printf("              ");
 
     Sleep(200);
     turnWheel(wState);
@@ -129,7 +113,7 @@ int jogo(int *wState)
         {
 
             system("cls");
-            ShowConsoleCursor(0);
+            showConsoleCursor(0);
             background(1);
             return jogo(wState);
         }
@@ -138,14 +122,44 @@ int jogo(int *wState)
     }
 
     return 0;
-}
+ }
+
+/*clsMenu()
+ Apagar o Menu*/
+ int clsMenu()
+ {
+    ScreenInfo scr = getScreen();
+    unsigned short halfX = scr.X/2,halfY = scr.Y/2;
+    int i,j, offset = scr.X < 92 ? 8 : 0;
 
 
-int menu(int *wState)
-{
+    gotoxy(-12 + offset, halfY/1.5f + 1);
+    for(i = 0; i < 9 ; i++ )
+    {
+        puts("                             ");
+        gotoxy(-12 + offset, halfY/1.5f - i);
+    }
+    
+    textcolor(63);
+    gotoxy(0,halfY/4); printf("\n");
+    crmove(halfX + offset - 9,0);
+    printf("                   \n");
+    crmove(halfX + offset - 9,0);
+    printf("                   \n");
+    crmove(halfX + offset - 9,0);
+    printf("                   \n");
+
+    gotoxy(-7,-halfY/2);
+    printf("              ");
+ }
+
+/*Menu(roda)*/
+ int menu(int *wState)
+ {
     unsigned char sOption;
-    unsigned short halfX = consoleInfo('X')/2,halfY = consoleInfo('Y')/2;
-    int i = 0,j = 0,offset = consoleInfo('X') < 92 ? 8 : 0;
+    ScreenInfo scr = getScreen();
+    unsigned short halfX = scr.X/2,halfY = scr.Y/2;
+    int i = 0,j = 0,offset = scr.X < 92 ? 8 : 0;
 
     const char *nome[] = {
 
@@ -176,12 +190,12 @@ int menu(int *wState)
         gotoxy(-12 + offset, halfY/1.5f - i);
     }
     textcolor(63);
-    gotoxy(offset,halfY/4); printf("\n");
-    crmove(halfX - 9 + offset,0);
+    //gotoxy(offset,halfY/4); printf("\n");
+    gotoxy( -9 + offset,-1);
     printf("PRESS 1 TO    START\n");
-    crmove(halfX - 9 + offset,0);
+    gotoxy(-9 + offset,-2);
     printf("PRESS 2 TO  OPTIONS\n");
-    crmove(halfX - 9 + offset,0);
+    gotoxy(-9 + offset,-3);
     printf("PRESS 3 TO CONTROLS\n");
     //MENU
  
@@ -201,7 +215,7 @@ int menu(int *wState)
                     gotoxy(-7,-halfY/2);
                     printf("INSERT 1 COIN");
                     textcolor(7);
-                    estrelas1();
+                   // estrelas1();
 
                 }else
                 {
@@ -212,12 +226,12 @@ int menu(int *wState)
                     gotoxy(-7,-halfY/2);
                     printf("              ");
                     textcolor(7);
-                    estrelas2();
+                   // estrelas2();
                 }
                 if(consoleInfo('C') == -10) //Caso o tamanho mude
                 {
                     system("cls");
-                    ShowConsoleCursor(0);
+                    showConsoleCursor(0);
                     return menu(wState);
                 }
         }
@@ -234,7 +248,7 @@ int menu(int *wState)
         printf("quitar");
         break;
     case '1':
-       // system("cls");
+        clsMenu();
         jogo(wState);
         break;
     case '2':
@@ -248,5 +262,5 @@ int menu(int *wState)
     }
 
     return 0;
-}
+ }
 

@@ -1,3 +1,7 @@
+/*
+  Biblioteca p/ controle do cursor
+  V 101119
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
@@ -7,6 +11,22 @@
 //Tamanho minimo da tela
   #define minY 44
   #define minX 60
+/**/
+
+/*struct ScreenInfo
+  Guarda as informações da tela;*/
+  typedef struct ScreenInfo
+  {
+    int X,Y,D;
+  } ScreenInfo;
+
+  static ScreenInfo Screen = {0,0,0};
+
+  ScreenInfo getScreen()
+  {
+    return Screen;
+  }
+/**/
   
 /*textcolor(int color)
   Valor do Int = Cor da letra e cor do fundo, ./paletadecores.exe */
@@ -16,19 +36,20 @@
       SetConsoleTextAttribute(h, color);
       return 0;
   }
-  
-/* ShowConsoleCursor(int 0/!=0) 
+/**/
+
+/* showConsoleCursor(int 0/!=0) 
   0 deixa o cursor invisivel e 1 deixa o cursor visivel*/
-  int ShowConsoleCursor(int showFlag)
+  int showConsoleCursor(int showFlag)
  {  
     HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_CURSOR_INFO cursorInfo;       
-    GetConsoleCursorInfo(h, &cursorInfo); //Pega as informações atuais do cursosr p/ só mudar a váriavel de visibilidade
-    cursorInfo.bVisible = showFlag;       
-    SetConsoleCursorInfo(h, &cursorInfo); 
+    CONSOLE_CURSOR_INFO info;       
+    GetConsoleCursorInfo(h, &info); //Pega as informações atuais do cursosr p/ só mudar a váriavel de visibilidade
+    info.bVisible = showFlag;       
+    SetConsoleCursorInfo(h, &info); 
     return showFlag;
   }
-
+/**/
   
 /* Console Info(char Mode);
   X -> TamanhoMax em X,
@@ -40,128 +61,151 @@
   */
   int consoleInfo(unsigned char c) 
   {
+    
+  /*Variaveis*/
 
-    HANDLE console;                   //Variavel que acessa algo do sistema(no Caso o console);
     CONSOLE_SCREEN_BUFFER_INFO info; //Struct que guarda informações (tamanho,posição do cursor, etc) de um console; V
-
-    SMALL_RECT scrSize;    //4 Variaveis mas só duas(Bottom e Right) importam porque o tamanho é na diagonal
-    COORD bufferSize;      //Vetor R2
-    char cmd[30] = "";
-    char num[4] = "";
-    unsigned char tmpC;
-    unsigned int tmpD = 0;
-    unsigned static int x ,y ,d;
-    static int flag;
-    short r = -1; //Variavel de retorno
-    tmpC = c;
-
-    // V Aponta para o terminal atual; V
-    //Abre o arquivo de nome CNOUT$(Console Output) com acesso para leitura e escrita e compartilhamento
-    console = CreateFileW(L"CONOUT$", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
-    NULL, OPEN_EXISTING,0, NULL); //getstdhandle não funcionou idkwhy.
-    //OPEN_EXISTING = Só tentar abrir se o console existir;
+    SMALL_RECT              scrSize; //4 Variaveis mas só duas(Bottom e Right) importam porque o tamanho é na diagonal
+    HANDLE                  console; //Variavel que acessa algo do sistema(no Caso o console);
+    unsigned  int             x,y,d; //tamanho em x e y e a diagonal;
+    unsigned char              tmpC; //P/ Recursividade;
+    static    int              flag; //-11 caso a diagonal mude;
+    short              r       = -1; //Variavel de retorno;
+    char               cmd[30] = ""; //Comando do CMD p/ mudar o tamanho da tela;
+    char               num[04] = ""; //String Temporária p/ sprintf;
     
-    if (console == INVALID_HANDLE_VALUE) //Se o console for Inválido retorna um número negativo;
-      return -1;
+  /*Variaveis*/
 
 
-    if (GetConsoleScreenBufferInfo(console, &info) == 0) //Caso não consiga atribuir nada (Return 0;) a função retorna um número negativo;
-      return -1;
-  
+    tmpC  = c;
 
-    scrSize = info.srWindow;
-    x = abs(scrSize.Right - scrSize.Left + 1);
-    y = abs(scrSize.Bottom - scrSize.Top + 1);
-    tmpD = sqrt(pow(x,2) + pow(y,2));
+    //Abre o Handle(Arquivo) CNOUT$(Console Output) com acesso pleno(Escrita e Leitura)
+      console = CreateFileW(L"CONOUT$", GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
+        NULL, OPEN_EXISTING,0, NULL); //getstdhandle não funcionou idkwhy.
+        //OPEN_EXISTING = Só tentar abrir se o console existir;
+    //Inicialização
 
-    if(tmpD != d)
-    {
-      if(c != 'c' && c != 'C' && c != 66)
-      flag = -10;
+    //Se o console for Inválido retorna um número negativo;
+      if (console == INVALID_HANDLE_VALUE) 
+        return -1;
+    //(ERRO)
 
-      c = 's';   
-      
-    }
+    //Caso não consiga atribuir nada (Return 0;) a função retorna um número negativo;
+      if (GetConsoleScreenBufferInfo(console, &info) == 0) 
+        return -1;
+    //(ERRO)
+
+    //Calcular tamanho da tela atual
+      scrSize = info.srWindow;
+      x       =  abs(scrSize.Right   - scrSize.Left  + 1);
+      y       =  abs(scrSize.Bottom  - scrSize.Top   + 1);
+      d       = sqrt(pow(x,2) + pow(y,2));
+    //1
     
+    //Na primeira inicialização o tamanho da tela salvo vai ser o calculado na hora.
+      if(Screen.X == 0)
+        Screen = (ScreenInfo){.X = x,.Y = y,.D = d};
+    //1.5
 
-    switch (c)
-    {
-    case 'c': case 'C': case 66:
-      
-      if(flag == -10)
-      {r = -10;}
-      else
-      {r = 0;}
-      flag = 0;
-      break;
-    /* */
-    case 'x': case 'X': case 0: 
-      r = x;
-      break;
-    case 'Y': case 'y': case 1:
-      r = y;
-      break;
-    /* */
-    case 'v': case 'V': case 2:
-      r = info.dwCursorPosition.Y;
-      break;
-    case 'h': case 'H': case 3:
-      r = info.dwCursorPosition.X;
-      break;
-    /* */
-    case 'S': case 's': case 190:
-      
-      
-      if(x <= minX )
-        {
-          scrSize.Right  = minX;
-          scrSize.Bottom = !scrSize.Bottom % 2 ? scrSize.Bottom : scrSize.Bottom + 1;
-          scrSize.Left   = 0;
-          scrSize.Top    = 0;
-        }
-      
-      if(y <= minY )
-        {
-          scrSize.Right  = !scrSize.Right % 2 ? scrSize.Right : scrSize.Right + 1;
-          scrSize.Bottom = minY;
-          scrSize.Left   = 0;
-          scrSize.Top    = 0;
-        }
-
-
-      bufferSize.X = scrSize.Right  + 1;
-      bufferSize.Y = scrSize.Bottom + 1;
-      
-      x = abs(scrSize.Right - scrSize.Left + 1);
-      y = abs(scrSize.Bottom - scrSize.Top + 1);
-      d = sqrt(pow(x,2) + pow(y,2));
-      r = d;
-
-      strcat(cmd,"Mode con: cols=");
-      sprintf(num,"%d",x);
-      strcat(cmd,num);
-      strcat(cmd," lines=");
-      sprintf(num,"%d",y);
-      strcat(cmd,num);
-      system(cmd);
+    //Checa se a diagonal salva é igual a diagonal recem-calculada
+      if(Screen.D != d)
+      {
+        flag  = -10;  //ativa a flag;
+        c     = 's';  //modo setup pra ajustar o tamanho;
+      }
+    //1.75
     
-      break;
-    /* */
-    default:
-      CloseHandle(console);
-      return -1;
-      break;
-    }
+    //Switch do argumento passado
+      switch (c)
+      {
+      /*StartSwitch*/    
+        /*C*/
+          case 'c': case 'C': case 66:
+            if(flag == -10) 
+              {r = -10;}  //retorna -10 caso a flag esteja ativa;
+            else
+              {r =   0;}  //retorna 0 caso o tamanho não tenha mudado (!flag);
+            flag =   0;   //desativa a flag independentemente
+            break;
+        /*X*/
+          case 'x': case 'X': case 0: 
+            r = x;        //retorna o valor de X puro que foi calculado acima.
+            break;
+        /*Y*/
+          case 'Y': case 'y': case 1:
+            r = y;        //retorna o valor de Y puro que foi calculado acima.
+            break;
+        /*V*/
+          case 'v': case 'V': case 2:
+            r = info.dwCursorPosition.Y; //retorna a posição do cursor em Y.
+            break;
+        /*H*/
+          case 'h': case 'H': case 3:
+            r = info.dwCursorPosition.X; //retorna a posição do cursor em X.
+            break;
+        /*S*/
+          case 'S': case 's': case 190:
+            
+          //Se o tamanho em X for menor que o minimo ajustar para o minimo;
+            if(x <= minX ) 
+              {
+                scrSize.Right  = minX;
+                scrSize.Bottom = !scrSize.Bottom % 2 ? scrSize.Bottom : scrSize.Bottom + 1;
+                scrSize.Left   = 0;
+                scrSize.Top    = 0;
+              }
+          //Se o tamanho em Y for menor que o minimo ajustar para o minimo;
+            if(y <= minY ) 
+              {
+                scrSize.Right  = !scrSize.Right % 2 ?  scrSize.Right  : scrSize.Right + 1;
+                scrSize.Bottom = minY;
+                scrSize.Left   = 0;
+                scrSize.Top    = 0;
+              }
 
-    CloseHandle(console);  //Fecha o acesso ao console p/ liberar espaço para outras aplicações que possam usar ele;
+          //Atualizar Struct
+            Screen.X =  abs(scrSize.Right   - scrSize.Left  + 1);
+            Screen.Y =  abs(scrSize.Bottom  - scrSize.Top   + 1);
+            Screen.D = sqrt(pow(x,2) + pow(y,2));;
+            //atualizar Struct
 
-    if(tmpC != c && tmpC!= 'S' && tmpC != 's' && tmpC != 190)
-    return consoleInfo(tmpC);
-    else  
-    return  r;
+          //Concatena comando pra ser usado no console
+            strcat(cmd,"Mode con: cols=");
+            sprintf(num,"%d",Screen.X);
+            strcat(cmd,num);
+            strcat(cmd," lines=");
+            sprintf(num,"%d",Screen.Y);
+            strcat(cmd,num);
+            system(cmd);
 
+          
+                      
+          
+            break;
+        /*default*/
+          default:
+            //Fecha o acesso ao console p/ liberar espaço para outras aplicações que possam usar ele;
+            CloseHandle(console);
+            return -1;
+            break;
+      /* EndSwitch */
+      }
+    //2
+
+    //Fecha o acesso ao console p/ liberar espaço para outras aplicações que possam usar ele;
+      CloseHandle(console);  
+    //3
+
+    //Recursão
+      if(tmpC != c && tmpC!= 'S' && tmpC != 's' && tmpC != 190)
+        return consoleInfo(tmpC);
+    //Retorno Padrão
+      else  
+      return  r;
+    //
+    
   }
-
+/**/
 
 /* gotoxy(int x, int y):
   Move o Cursor até a posição
@@ -170,8 +214,8 @@
   {
     COORD coord; //Vetor R2
     
-    x = (consoleInfo('X')/2) + x - 1; //Centro + X;
-    y = (consoleInfo('Y')/2) - y; //Centro + Y;
+    x =  (Screen.X/2) + x - 1; //Centro + X;
+    y =  (Screen.Y/2) - y;     //Centro + Y;
     
 
     coord.X = x;
@@ -182,7 +226,7 @@
 
     return 0;
   }
-
+/**/
 
 /* crmove(int x, int y):
   Move o Cursor até a posição
@@ -198,10 +242,11 @@
     coord.X = x;
     coord.Y = y;
 
-    if(y > consoleInfo('Y'))
-    return -1;
+    if(abs(y) > Screen.Y)
+     return -1;
 
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord); //Seta a posição do cursor dentro do console padrão
     
     return  0;
   }
+/**/
