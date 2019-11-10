@@ -3,6 +3,7 @@
 
 
 int consoleInfo(char c);
+int ShowConsoleCursor(int showFlag);
 int textcolor(int color);
 int gotoxy(int x,int y);
 int crmove(int x, int y);
