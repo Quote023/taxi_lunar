@@ -8,7 +8,7 @@
 //dividi o print de insert 1coin e espaço em 2 funções pra poder rodar no contratempo das estrelas euso burrinha
 void coin(){
     
-    ScreenInfo scr = getScreen();
+    ScreenInfo scr = *getScreen();
     unsigned short centroX = scr.X/2,centroY = scr.Y/2;
     
     textcolor(63);
@@ -19,7 +19,7 @@ void coin(){
 }
 
 void space(){
-    ScreenInfo scr = getScreen();
+    ScreenInfo scr = *getScreen();
     unsigned short centroX = scr.X/2,centroY = scr.Y/2;
      textcolor(59);
                     Sleep(200);
@@ -29,7 +29,7 @@ void space(){
 }
 
 void estrelas1(){
-    ScreenInfo scr = getScreen();
+    ScreenInfo scr = *getScreen();
     unsigned short centroX = scr.X/2,centroY = scr.Y/2;
 
         Sleep(300);
@@ -100,7 +100,7 @@ void estrelas1(){
 }
 
 void estrelas2(){
-    ScreenInfo scr = getScreen();
+    ScreenInfo scr = *getScreen();
     unsigned short centroX = scr.X/2,centroY = scr.Y/2;
         Sleep(300);
         gotoxy(centroX/2+4, centroY/2+6); //1

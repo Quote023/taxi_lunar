@@ -11,7 +11,7 @@
 /*Background(true = printar o chao/false = não printar)*/
  int background(int iFlag)
  {
-    ScreenInfo scr = getScreen();
+    ScreenInfo scr = *getScreen();
     unsigned short halfX = scr.X/2,halfY = scr.Y/2;
     int i,j,offset = scr.X < 92 ? 8 : 0;
 
@@ -54,9 +54,9 @@
 /*jogo(roda)*/
  int jogo(int *wState)
  {
-    ScreenInfo scr = getScreen();
+    ScreenInfo scr = *getScreen();
     unsigned short halfX = scr.X/2,halfY = scr.Y/2;
-    int i,j,offset = scr.X < 92 ? 8 : 0;
+    int i,offset = scr.X < 92 ? 8 : 0;
 
 
     Sleep(200);
@@ -128,9 +128,9 @@
  Apagar o Menu*/
  int clsMenu()
  {
-    ScreenInfo scr = getScreen();
-    unsigned short halfX = scr.X/2,halfY = scr.Y/2;
-    int i,j, offset = scr.X < 92 ? 8 : 0;
+    ScreenInfo scr = *getScreen();
+    unsigned short halfY = scr.Y/2;
+    int i, offset = scr.X < 92 ? 8 : 0;
 
 
     gotoxy(-12 + offset, halfY/1.5f + 1);
@@ -141,24 +141,26 @@
     }
     
     textcolor(63);
-    gotoxy(0,halfY/4); printf("\n");
-    crmove(halfX + offset - 9,0);
+    //gotoxy(0,halfY/4); printf("\n");
+    gotoxy(-9 + offset,-2);
     printf("                   \n");
-    crmove(halfX + offset - 9,0);
+    gotoxy(-9 + offset,-2);
     printf("                   \n");
-    crmove(halfX + offset - 9,0);
+    gotoxy(-9 + offset,-2);
     printf("                   \n");
 
     gotoxy(-7,-halfY/2);
     printf("              ");
+
+    return 0;
  }
 
 /*Menu(roda)*/
  int menu(int *wState)
  {
     unsigned char sOption;
-    ScreenInfo scr = getScreen();
-    unsigned short halfX = scr.X/2,halfY = scr.Y/2;
+    ScreenInfo scr = *getScreen();
+    unsigned short halfY = scr.Y/2;
     int i = 0,j = 0,offset = scr.X < 92 ? 8 : 0;
 
     const char *nome[] = {

@@ -7,7 +7,8 @@
   } ScreenInfo;
 
 
- ScreenInfo getScreen();
+ScreenInfo *getScreen();
+int setScreen(ScreenInfo s);
 int consoleInfo(char c);
 int showConsoleCursor(int showFlag);
 int textcolor(int color);

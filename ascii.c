@@ -7,19 +7,18 @@
 
 int elipse(int X,int Y,short f,char fill)
 {
-    ScreenInfo scr = getScreen();
-    int i,j,maior,offset = scr.X < 92 ? 8 : 0;;//,menor;
+    ScreenInfo scr = *getScreen();
+    int i,j,offset = scr.X < 92 ? 8 : 0;;//,menor;
     float eX,eY;
 
-     if(X > Y){ maior = X;} //crmove(-X,Y);
-     else { maior = Y;} //crmove(-Y,X);
+    
 
         gotoxy(-X + offset + 1,Y/2 - 2);
  
        // crmove(,);
       
 
-    for(i = Y - 2; i >= -Y/2 ;i--)
+    for(i = Y - 2; i >= -Y/2 + 2 ;i--)
     {
         for (j = -X; j <= X + offset/2; j++)
         {

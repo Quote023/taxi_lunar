@@ -5,7 +5,7 @@
 
 int turnWheel(int *i)
 {
-    ScreenInfo scr = getScreen();
+    ScreenInfo scr = *getScreen();
     unsigned short halfX = scr.X/2,halfY = scr.Y/2;
     int offset = scr.X < 92 ? 8 : 0;
 
@@ -40,4 +40,5 @@ int turnWheel(int *i)
 
     *i = *i + 1;
 
+    return(*i);
 }

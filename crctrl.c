@@ -20,11 +20,17 @@
     int X,Y,D;
   } ScreenInfo;
 
-  static ScreenInfo Screen = {0,0,0};
 
-  ScreenInfo getScreen()
+  ScreenInfo *getScreen()
   {
-    return Screen;
+    static ScreenInfo Screen;// = {0,0,0};
+    return &Screen;
+  }
+
+  int setScreen(ScreenInfo s)
+  {
+    *getScreen() = s;
+      return 0;
   }
 /**/
   
@@ -66,6 +72,7 @@
 
     CONSOLE_SCREEN_BUFFER_INFO info; //Struct que guarda informações (tamanho,posição do cursor, etc) de um console; V
     SMALL_RECT              scrSize; //4 Variaveis mas só duas(Bottom e Right) importam porque o tamanho é na diagonal
+    ScreenInfo              scrInfo; //Struct com Informações da tela;
     HANDLE                  console; //Variavel que acessa algo do sistema(no Caso o console);
     unsigned  int             x,y,d; //tamanho em x e y e a diagonal;
     unsigned char              tmpC; //P/ Recursividade;
@@ -75,8 +82,8 @@
     char               num[04] = ""; //String Temporária p/ sprintf;
     
   /*Variaveis*/
-
-
+    
+    scrInfo = *getScreen();
     tmpC  = c;
 
     //Abre o Handle(Arquivo) CNOUT$(Console Output) com acesso pleno(Escrita e Leitura)
@@ -103,12 +110,17 @@
     //1
     
     //Na primeira inicialização o tamanho da tela salvo vai ser o calculado na hora.
-      if(Screen.X == 0)
-        Screen = (ScreenInfo){.X = x,.Y = y,.D = d};
-    //1.5
+      if(scrInfo.X == 0)
+      {
+        scrInfo.X = x;
+        scrInfo.Y = y;
+        scrInfo.D = d;
+        setScreen(scrInfo);
+      }
+    //1.5;
 
     //Checa se a diagonal salva é igual a diagonal recem-calculada
-      if(Screen.D != d)
+      if(scrInfo.D != d)
       {
         flag  = -10;  //ativa a flag;
         c     = 's';  //modo setup pra ajustar o tamanho;
@@ -164,17 +176,18 @@
               }
 
           //Atualizar Struct
-            Screen.X =  abs(scrSize.Right   - scrSize.Left  + 1);
-            Screen.Y =  abs(scrSize.Bottom  - scrSize.Top   + 1);
-            Screen.D = sqrt(pow(x,2) + pow(y,2));;
+            scrInfo.X =  abs(scrSize.Right   - scrSize.Left  + 1);
+            scrInfo.Y =  abs(scrSize.Bottom  - scrSize.Top   + 1);
+            scrInfo.D = sqrt(pow(scrInfo.X,2) + pow(scrInfo.Y,2));;
+            setScreen(scrInfo);
             //atualizar Struct
 
           //Concatena comando pra ser usado no console
             strcat(cmd,"Mode con: cols=");
-            sprintf(num,"%d",Screen.X);
+            sprintf(num,"%d",scrInfo.X);
             strcat(cmd,num);
             strcat(cmd," lines=");
-            sprintf(num,"%d",Screen.Y);
+            sprintf(num,"%d",scrInfo.Y);
             strcat(cmd,num);
             system(cmd);
 
@@ -213,7 +226,8 @@
   int gotoxy(int x, int y)
   {
     COORD coord; //Vetor R2
-    
+    ScreenInfo Screen = *getScreen();
+
     x =  (Screen.X/2) + x - 1; //Centro + X;
     y =  (Screen.Y/2) - y;     //Centro + Y;
     
@@ -234,7 +248,8 @@
   int crmove(int x, int y)
   {
     COORD coord; //Vetor R2
-    
+    ScreenInfo Screen = *getScreen();
+
     x = consoleInfo('H') + x; //PosAtual em X + x;
     y = consoleInfo('V') - y; //PosAtual em Y + Y;
     

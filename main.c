@@ -15,6 +15,7 @@ int main(void)
 {
     setlocale(LC_ALL, "");
     int wState = 0; 
+    
     showConsoleCursor(0);
     consoleInfo('s');
     menu(&wState);
