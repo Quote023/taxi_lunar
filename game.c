@@ -5,6 +5,8 @@
 #include "car.h"
 #include "ascii.h"
 #include "crctrl.h"
+#include "stars.h"
+
 
 int background(int iFlag)
 {
@@ -199,6 +201,8 @@ int menu(int *wState)
                     gotoxy(-7,-halfY/2);
                     printf("INSERT 1 COIN");
                     textcolor(7);
+                    estrelas1();
+
                 }else
                 {
                    
@@ -207,7 +211,8 @@ int menu(int *wState)
                     textcolor(59);
                     gotoxy(-7,-halfY/2);
                     printf("              ");
-                     textcolor(7);
+                    textcolor(7);
+                    estrelas2();
                 }
                 if(consoleInfo('C') == -10) //Caso o tamanho mude
                 {
