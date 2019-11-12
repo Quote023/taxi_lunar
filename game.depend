@@ -72,3 +72,66 @@
 
 1573329658 e:\_projetos\poli\lpi\taxi_lunar\car.h
 
+1573413917 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\main.c
+	<stdio.h>
+	<locale.h>
+	<stdlib.h>
+	<conio.h>
+	<math.h>
+	<windows.h>
+	"crctrl.h"
+	"game.h"
+	"ascii.h"
+	"car.h"
+	"stars.h"
+
+1573413917 c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\crctrl.h
+
+1573413917 c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\game.h
+
+1573413917 c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\ascii.h
+	<math.h>
+
+1573413917 c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\car.h
+
+1573413917 c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\stars.h
+
+1573413917 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\ascii.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"crctrl.h"
+
+1573413917 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\crctrl.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<math.h>
+	<string.h>
+
+1573564221 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\game.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<windows.h>
+	"car.h"
+	"ascii.h"
+	"crctrl.h"
+	"stars.h"
+
+1573413917 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\tempcoderunnerfile.c
+
+1573413917 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\car.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"crctrl.h"
+
+1573586420 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\stars.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"crctrl.h"
+	"stars.h"
+	<windows.h>
+

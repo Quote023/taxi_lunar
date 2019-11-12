@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="ascii.h" />
+		<Unit filename="car.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="car.h" />
 		<Unit filename="crctrl.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -46,6 +50,10 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="stars.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="stars.h" />
 		<Unit filename="tempCodeRunnerFile.c">
 			<Option compilerVar="CC" />
 		</Unit>

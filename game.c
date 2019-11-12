@@ -66,41 +66,41 @@ int smoke(int state)
             Sleep(10);
             gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
             printf("  o");
-            
+
         }
         else
         {
             Sleep(10);
             gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
             printf(" O ");
-            
+
         }
         if(state % 3 == 0)
         {
             Sleep(10);
             gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
-            printf("0  "); 
-          
+            printf("0  ");
+
 
         }
         if(state % 6 == 0)
         {
-            
+
             gotoxy(-halfX + 10 - offset/2 - 5,-halfY + 7);
-            printf("o "); 
+            printf("o ");
             crmove(-1,-1);
             printf("0");
-           
+
 
         }
-        else   
+        else
         {
             Sleep(20);
             gotoxy(-halfX + 10 - offset/2 - 5,-halfY + 7);
-            printf("  "); 
+            printf("  ");
             crmove(-1,-1);
             printf("  ");
-            
+
         }
 
 
@@ -135,16 +135,17 @@ int smoke(int state)
             if(tecla = 32)
             jump(&y);
         }
-        
-        
+
+
 
             if(y == 0)
             {
                 Sleep(50);
                 turnWheel(wState);
                 smoke(i);
+                estrelas();
             }
-           
+
 
             if(consoleInfo('C') == -10) //Caso o tamanho mude
             {
@@ -154,7 +155,7 @@ int smoke(int state)
                 return jogo(wState);    //Recomeça o jogo
             }
             i++;
-               
+
     }
 
     return 0;
@@ -177,7 +178,7 @@ int smoke(int state)
         }
     //
 
-    //Seleção  
+    //Seleção
         textcolor(63);
         gotoxy(-10 + offset,-1);
         printf("                    ");
@@ -203,7 +204,7 @@ int smoke(int state)
     unsigned short halfY = scr.Y/2;
     int i = 0,j = 0,offset = scr.X < 92 ? 8 : 0;
 
-    const char *nome[] = 
+    const char *nome[] =
      {
 
         "    _____ _  __  _____",
@@ -218,7 +219,7 @@ int smoke(int state)
 
      };
     //
-  
+
     background(1);
 
     //MENU
@@ -229,7 +230,7 @@ int smoke(int state)
             puts(nome[i]);
             gotoxy(-12 + offset, halfY/1.5f - i);
         }
-        
+
         textcolor(63);
         gotoxy( -9 + offset,-1);
         printf("PRESS 1 TO    START");
@@ -238,7 +239,7 @@ int smoke(int state)
         gotoxy(-9 + offset,-3);
         printf("PRESS 3 TO CONTROLS");
     //MENU
- 
+
 
     do
     {
@@ -248,25 +249,25 @@ int smoke(int state)
         {
                  if(!(j % 2))
                 {
-                    
+
                     Sleep(150);
                     turnWheel(wState);
                     textcolor(63);
                     gotoxy(-7,-halfY/2);
                     printf("INSERT 1 COIN");
                     textcolor(7);
-                   // estrelas1();
+                    estrelas();
 
                 }else
                 {
-                   
+
                     Sleep(150);
                     turnWheel(wState);
                     textcolor(59);
                     gotoxy(-7,-halfY/2);
                     printf("              ");
                     textcolor(7);
-                   // estrelas2();
+
                 }
                 if(consoleInfo('C') == -10) //Caso o tamanho mude
                 {
@@ -288,6 +289,7 @@ int smoke(int state)
     case '1':
         clsMenu();
         jogo(wState);
+
         break;
     case '2':
         system("cls");
