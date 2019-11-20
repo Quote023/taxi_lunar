@@ -114,7 +114,7 @@ int smoke(int state)
  {
     ScreenInfo scr = *getScreen();
     unsigned short halfX = scr.X/2,halfY = scr.Y/2,offset = scr.X < 92 ? 8 : 0;
-    int i = 0, y = 0;
+    int i = 0, y = 0, t = 0;
     char tecla = 0;
 
 
@@ -137,10 +137,11 @@ int smoke(int state)
             if(tecla == 32)
                 jump(&y);
             if(tecla == 46)
-                bullet();
-
+               bullet(&t);
         }
 
+        if(t > 0)
+            bullet(&t);
 
 
 
