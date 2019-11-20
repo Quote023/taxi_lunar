@@ -167,6 +167,8 @@ void estrelas(){
         else
             printf(" ");
 
+
+
 }
 
 

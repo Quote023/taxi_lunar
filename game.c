@@ -6,6 +6,7 @@
 #include "ascii.h"
 #include "crctrl.h"
 #include "stars.h"
+#include "bullets.h"
 
 
 
@@ -116,6 +117,7 @@ int smoke(int state)
     int i = 0, y = 0;
     char tecla = 0;
 
+
     //Acelerção gradual
         Sleep(200);
         turnWheel(wState);
@@ -132,9 +134,13 @@ int smoke(int state)
         if(kbhit())
         {
             tecla = getch();
-            if(tecla = 32)
-            jump(&y);
+            if(tecla == 32)
+                jump(&y);
+            if(tecla == 46)
+                bullet();
+
         }
+
 
 
 

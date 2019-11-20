@@ -1,2 +1,1 @@
-void estrelas1();
-void estrelas2();
+void estrelas();

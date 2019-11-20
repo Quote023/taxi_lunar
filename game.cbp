@@ -35,6 +35,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="ascii.h" />
+		<Unit filename="bullets.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="bullets.h" />
 		<Unit filename="car.c">
 			<Option compilerVar="CC" />
 		</Unit>
