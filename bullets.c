@@ -18,14 +18,15 @@ int bullet(int *i){
         gotoxy(-halfX + 10 - offset/2 + *i + 7,-halfY + 7);
             printf(".");
 
-    }
-
-    if (*i == (scr.X - 20)){
+    }else{
 
         gotoxy(-halfX + 10 - offset/2 + *i + 7,-halfY + 7);
             printf(" ");
 
+        *i = 0;
+
     }
+
 
     return(*i);
 
