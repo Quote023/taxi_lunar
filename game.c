@@ -112,10 +112,13 @@ int smoke(int state)
 /*jogo(roda)*/
  int jogo(int *wState)
  {
+
     ScreenInfo scr = *getScreen();
     unsigned short halfX = scr.X/2,halfY = scr.Y/2,offset = scr.X < 92 ? 8 : 0;
     int i = 0, y = 0, t = 0;
     char tecla = 0;
+
+    float cont = 0;
 
 
     //Acelerção gradual
@@ -129,8 +132,24 @@ int smoke(int state)
         turnWheel(wState);
     //
 
+
     while(1)
     {
+        gotoxy(-58, -7);
+        printf("score: ");
+
+        gotoxy(-50, -7);
+        printf("%.2f km", cont);
+
+        cont += 0.1;
+
+        gotoxy(-50, -7);
+        printf("    ");
+
+        gotoxy(-50, -7);
+        printf("%.2f km", cont);
+
+
         if(kbhit())
         {
             tecla = getch();
@@ -138,6 +157,7 @@ int smoke(int state)
                 jump(&y);
             if(tecla == 46)
                bullet(&t);
+
         }
 
         if(t > 0)

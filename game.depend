@@ -72,7 +72,7 @@
 
 1573329658 e:\_projetos\poli\lpi\taxi_lunar\car.h
 
-1573413917 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\main.c
+1574340116 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\main.c
 	<stdio.h>
 	<locale.h>
 	<stdlib.h>
@@ -109,7 +109,7 @@
 	<math.h>
 	<string.h>
 
-1574291124 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\game.c
+1574341009 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\game.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -140,7 +140,7 @@
 
 1573666411 c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\bullets.h
 
-1574291997 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\bullets.c
+1574338047 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\bullets.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
