@@ -4,18 +4,40 @@
 #include <math.h>
 #include "crctrl.h"
 
+int drawRect(int X,int Y,char fill)
+{
+    int i,j;
+    
+    gotoxy(-X/2,Y/2);
 
-int elipse(int X,int Y,short f,char fill)
+    for(i = 0; i < Y;++i)
+    {
+        for(j = 0; j < X; ++j)
+        {
+            if(i == 0 || i == Y-1 || j == 0 || j == X-1)
+                textcolor(238);
+            else
+                textcolor(7);
+            
+            printf("%c",fill);
+        }
+        crmove(-X,-1);
+
+    }
+
+
+}
+
+
+
+int elipse(short X,short Y,char fill)
 {
     ScreenInfo scr = *getScreen();
-    int i,j,offset = scr.X < 92 ? 8 : 0;;//,menor;
+    short i,j,offset = scr.X < 92 ? 8 : 0;;//,menor;
     float eX,eY;
-
-    
 
         gotoxy(-X + offset + 1,Y/2 - 2);
  
-       // crmove(,);
       
 
     for(i = Y; i >= -Y/2 + 8 ;i--)

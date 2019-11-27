@@ -2,7 +2,6 @@
 #define ASCII_H_INCLUDED
 #include <math.h>
 
-int circulo(int r,char fill);
-int elipse(int X,int Y,short f,char fill);
-
+int elipse(short X,short Y,char fill);
+int drawRect(int X,int Y,char fill);
 #endif // ASCII_H_INCLUDED

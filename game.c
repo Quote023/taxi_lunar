@@ -26,7 +26,7 @@
 
     textcolor(59);
     //gotoxy(0,-halfY );
-    elipse(halfX/1.5f,halfY,0,' ');
+    elipse(halfX/1.5f,halfY,' ');
     textcolor(7);
 
    ///CARRROOOOOOOOOO
