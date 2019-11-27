@@ -24,7 +24,7 @@
     return &Screen;
   }
 
-  int setScreen(ScreenInfo s)
+  static int setScreen(ScreenInfo s)
   {
     *getScreen() = s;
       return 0;

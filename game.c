@@ -8,14 +8,25 @@
 #include "stars.h"
 #include "bullets.h"
 
+//Variaveis Globais;
+    ScreenInfo scr;
+    unsigned short halfX,halfY,offset;
 
+
+    static void setGlobal()
+    {
+        scr = *getScreen();
+        halfX = scr.X/2;
+        halfY = scr.Y/2;
+        offset = scr.X < 92 ? 8 : 0;
+    }
+//
 
 /*Background(true = printar o chao/false = não printar)*/
- int background(int iFlag)
+ static int background(int iFlag)
  {
-    ScreenInfo scr = *getScreen();
-    unsigned short halfX = scr.X/2,halfY = scr.Y/2;
-    int i,j,offset = scr.X < 92 ? 8 : 0;
+
+    int i;
 
     const char *car[] = {
     //\u2587\u2587
@@ -36,71 +47,76 @@
     gotoxy(-halfX + 10 - offset/2,-halfY + 6);
     puts (car[1]);
     ///CARRROOOOOOOOOO
- 
+    
+    gotoxy(-halfX,-17);
+     for(i=0; i< scr.X; i++)
+        printf("#");
+    printf("\n\r");
+      for(i=0; i< scr.X; i++)
+        printf("#");
+
  }
 //
 
 
+//Fumaça atrás do carro
+    int smoke(int state)
+    {
 
-int smoke(int state)
-{
-    ScreenInfo scr = *getScreen();
-    unsigned short halfX = scr.X/2,halfY = scr.Y/2,offset = scr.X < 92 ? 8 : 0;
+            if(state % 2)
+            {
+                gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
+                printf("  o");
 
+            }
+            else
+            {
+                gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
+                printf(" O ");
 
-        if(state % 2)
-        {
-            gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
-            printf("  o");
-
-        }
-        else
-        {
-            gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
-            printf(" O ");
-
-        }
-        if(state % 3 == 0)
-        {
-            gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
-            printf("0  ");
+            }
+            if(state % 3 == 0)
+            {
+                gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
+                printf("0  ");
 
 
-        }
-        if(state % 6 == 0)
-        {
+            }
+            if(state % 6 == 0)
+            {
 
-            gotoxy(-halfX + 10 - offset/2 - 5,-halfY + 7);
-            printf("o ");
-            crmove(-1,-1);
-            printf("0");
+                gotoxy(-halfX + 10 - offset/2 - 5,-halfY + 7);
+                printf("o ");
+                crmove(-1,-1);
+                printf("0");
 
 
-        }
-        else
-        {
-            gotoxy(-halfX + 10 - offset/2 - 5,-halfY + 7);
-            printf("  ");
-            crmove(-1,-1);
-            printf("  ");
+            }
+            else
+            {
+                gotoxy(-halfX + 10 - offset/2 - 5,-halfY + 7);
+                printf("  ");
+                crmove(-1,-1);
+                printf("  ");
 
-        }
+            }
 
 
 
-    return 0;
-}
+        return 0;
+    }
+//
 
 /*jogo(roda)*/
  int jogo(int *wState)
  {
 
-    ScreenInfo scr = *getScreen();
-    unsigned short halfX = scr.X/2,halfY = scr.Y/2,offset = scr.X < 92 ? 8 : 0;
     int i = 0, y = 0, t = 0, x = 0;
     char tecla = 0;
-    char array[] = "##########   ###############   ###############   ###############   ###############   ###############   ####################################";
+    const char array[] = "#####################################      ###############      ###############       ###############       ###############   ###############      ####################################";
     int n = 0,gIndex = 0;
+    int j = 1;
+
 
     float cont = 0;
 
@@ -115,7 +131,10 @@ int smoke(int state)
         Sleep(75);
         turnWheel(wState);
     //
-
+    gotoxy(-halfX + 1,-halfY + 3);
+    textcolor(102);//dourado
+    drawRect(scr.X,4,' ');
+    textcolor(7);//branco
 
     while(1)
     {
@@ -137,15 +156,21 @@ int smoke(int state)
         if(kbhit())
         {
             tecla = getch();
-            if(tecla == 32)
-                jump(&y);
-            if(tecla == 46)
+            if(tecla == 32 && y == 0)
+                jump(&y,i);
+            if(tecla == 46 && t == 0)
                bullet(&t);
 
         }
+        
+        
+        if( i % 10 == 0)
+        estrelas ();
 
         if(t > 0)
             bullet(&t);
+        if(y > 0)
+            jump(&y,i);
 
 
 
@@ -153,7 +178,7 @@ int smoke(int state)
             {
                 turnWheel(wState);
                 smoke    (*wState);
-                estrelas ();
+                
             }
 
 
@@ -161,28 +186,21 @@ int smoke(int state)
         
        
 
-    
-            for(n=0; n< scr.X; n++)
+            for(n=0; n< j; ++n)
             {
              
-                //gotoxy(2+n,3);
-                //if(i % 2 == 0){ 
-                    
-                //n = x - n > 0 ? x-n : 1;
-                gotoxy(consoleInfo('X')/2 - n,-17);
-                
+                gotoxy(halfX - n,-17);   
                 gIndex = n - x >= 0 ? n-x : n-x + scr.X;
                  if(gIndex < 0)
-                    {x = 0; n = 0; gIndex = 0;}
-                    
+                    {x = 0; n = 0; gIndex = 0;}    
                 printf("%c",array[gIndex]);
                 
                
-               // if(x >= sizeof(array)){ x = 0; n++;}
 
-
-               
             }
+
+               if(j < scr.X)
+                j+=1;
 
 
            // }
@@ -195,12 +213,13 @@ int smoke(int state)
             {
                 system("cls");
                 showConsoleCursor(0);   //Apaga o cursor
+                setGlobal();
                 background(1);          //Redesenha o fundo
                 return jogo(wState);    //Recomeça o jogo
             }
             
-            x++;
-            i++;
+            x+= 1;
+            i+= 1;
 
 
     }
@@ -213,8 +232,7 @@ int smoke(int state)
  Apagar o Menu*/
  int clsMenu()
  {
-    ScreenInfo scr = *getScreen();
-    unsigned short halfY = scr.Y/2,offset = scr.X < 92 ? 8 : 0;
+
     int i;
 
     //Nome
@@ -247,10 +265,12 @@ int smoke(int state)
 /*Menu(roda)*/
  int menu(int *wState)
  {
+    //Inicializa as variaveis Globais (primeria função a rodar).
+        setGlobal();
+    //Inicializa as variaveis Globais
+
     unsigned char sOption;
-    ScreenInfo scr = *getScreen();
-    unsigned short halfY = scr.Y/2;
-    int i = 0,j = 0,offset = scr.X < 92 ? 8 : 0;
+    int i = 0,j = 0;
 
     const char *nome[] =
      {

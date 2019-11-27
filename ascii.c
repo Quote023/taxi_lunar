@@ -8,7 +8,7 @@ int drawRect(int X,int Y,char fill)
 {
     int i,j;
     
-    gotoxy(-X/2,Y/2);
+    //gotoxy(-X/2,Y/2);
 
     for(i = 0; i < Y;++i)
     {
@@ -32,9 +32,18 @@ int drawRect(int X,int Y,char fill)
 
 int elipse(short X,short Y,char fill)
 {
-    ScreenInfo scr = *getScreen();
-    short i,j,offset = scr.X < 92 ? 8 : 0;;//,menor;
-    float eX,eY;
+
+    ScreenInfo      scr     = *getScreen();
+    unsigned short  halfX   =      scr.X/2,
+                    halfY   =      scr.Y/2,
+                    offset  =   scr.X < 92 
+                            ?            8 
+                            :            0;
+    float           eX,eY;
+    int               i,j;
+
+
+
 
         gotoxy(-X + offset + 1,Y/2 - 2);
  

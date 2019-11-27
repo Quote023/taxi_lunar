@@ -3,6 +3,5 @@
 
 int menu(int *wState);
 int jogo(int *wState);
-int background(int iFlag);
 
 #endif
