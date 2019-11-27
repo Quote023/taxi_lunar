@@ -36,21 +36,7 @@
     gotoxy(-halfX + 10 - offset/2,-halfY + 6);
     puts (car[1]);
     ///CARRROOOOOOOOOO
-    //Chão Inicial
-    if(iFlag)
-    {
-        textcolor(119);
-        gotoxy(-halfX + 1,-halfY + 5);
-        for(j = 0; j <= 4 ;j++)
-        {
-
-            for(i = 0; i < (halfX) * 2;i++)
-            {printf("X");}
-            // gotoxy(-halfX,-halfY + 6 - i);
-        }
-        textcolor(7);
-    }
-    //Chão Inicial
+ 
  }
 //
 
@@ -64,21 +50,18 @@ int smoke(int state)
 
         if(state % 2)
         {
-            Sleep(10);
             gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
             printf("  o");
 
         }
         else
         {
-            Sleep(10);
             gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
             printf(" O ");
 
         }
         if(state % 3 == 0)
         {
-            Sleep(10);
             gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
             printf("0  ");
 
@@ -96,7 +79,6 @@ int smoke(int state)
         }
         else
         {
-            Sleep(20);
             gotoxy(-halfX + 10 - offset/2 - 5,-halfY + 7);
             printf("  ");
             crmove(-1,-1);
@@ -115,8 +97,10 @@ int smoke(int state)
 
     ScreenInfo scr = *getScreen();
     unsigned short halfX = scr.X/2,halfY = scr.Y/2,offset = scr.X < 92 ? 8 : 0;
-    int i = 0, y = 0, t = 0;
+    int i = 0, y = 0, t = 0, x = 0;
     char tecla = 0;
+    char array[] = "##########   ###############   ###############   ###############   ###############   ###############   ####################################";
+    int n = 0,gIndex = 0;
 
     float cont = 0;
 
@@ -135,19 +119,19 @@ int smoke(int state)
 
     while(1)
     {
-        gotoxy(-58, -7);
-        printf("score: ");
+        // gotoxy(-58, -7);
+        // printf("score: ");
 
-        gotoxy(-50, -7);
-        printf("%.2f km", cont);
+        // gotoxy(-50, -7);
+        // printf("%.2f km", cont);
 
-        cont += 0.1;
+        //  cont += 0.1;
 
-        gotoxy(-50, -7);
-        printf("    ");
+        //   gotoxy(-50, -7);
+        //  printf("    ");
 
-        gotoxy(-50, -7);
-        printf("%.2f km", cont);
+        //  gotoxy(-50, -7);
+        //  printf("%.2f km", cont);
 
 
         if(kbhit())
@@ -165,13 +149,46 @@ int smoke(int state)
 
 
 
-            if(y == 0)
+            if(y == 0 && i % 2 == 0)
             {
-                Sleep(50);
                 turnWheel(wState);
-                smoke(i);
-                estrelas();
+                smoke    (*wState);
+                estrelas ();
             }
+
+
+
+        
+       
+
+    
+            for(n=0; n< scr.X; n++)
+            {
+             
+                //gotoxy(2+n,3);
+                //if(i % 2 == 0){ 
+                    
+                //n = x - n > 0 ? x-n : 1;
+                gotoxy(consoleInfo('X')/2 - n,-17);
+                
+                gIndex = n - x >= 0 ? n-x : n-x + scr.X;
+                 if(gIndex < 0)
+                    {x = 0; n = 0; gIndex = 0;}
+                    
+                printf("%c",array[gIndex]);
+                
+               
+               // if(x >= sizeof(array)){ x = 0; n++;}
+
+
+               
+            }
+
+
+           // }
+
+           
+            //Sleep(100);
 
 
             if(consoleInfo('C') == -10) //Caso o tamanho mude
@@ -181,9 +198,13 @@ int smoke(int state)
                 background(1);          //Redesenha o fundo
                 return jogo(wState);    //Recomeça o jogo
             }
+            
+            x++;
             i++;
 
+
     }
+
 
     return 0;
  }

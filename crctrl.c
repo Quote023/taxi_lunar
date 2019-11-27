@@ -7,6 +7,7 @@
 #include <windows.h>
 #include <math.h>
 #include <string.h>
+#include "crctrl.h"
 
 //Tamanho minimo da tela
   #define minY 44
@@ -15,10 +16,6 @@
 
 /*struct ScreenInfo
   Guarda as informações da tela;*/
-  typedef struct ScreenInfo
-  {
-    int X,Y,D;
-  } ScreenInfo;
 
 
   ScreenInfo *getScreen()
