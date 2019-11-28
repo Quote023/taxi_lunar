@@ -8,8 +8,9 @@
 int bullet(int *i)
 {
 
-    ScreenInfo scr;
-    unsigned short halfX,halfY,offset;
+    static ScreenInfo scr;
+    static unsigned short halfX,halfY,offset,pMax,pMin;
+    short posH;
 
     if(*i <= 0)
     {
@@ -21,24 +22,43 @@ int bullet(int *i)
     }
 
 
+    textcolor(7);
+    pMax = halfX + halfX/1.5f;
+    pMin = halfX - halfX/1.5f + 1;
+
     if(*i < (scr.X - 20)){
 
-        gotoxy(-halfX + 10 - offset/2 + *i + 7,-halfY + 7);
-            printf(" ");
+        posH = -halfX + 10 - offset/2 + *i + 7;
+        gotoxy(posH,-halfY + 7);
+        
+        posH+= halfX;
+        if(posH > pMin && posH <= pMax ) 
+            if(rand()% 100 < 30) textcolor(34);  
+                else textcolor(52);
+                
+        printf(" ");
+        
         ++*i;
-        gotoxy(-halfX + 10 - offset/2 + *i + 7,-halfY + 7);
-            printf(".");
+        
+        posH = -halfX + 10 - offset/2 + *i + 7;
+        gotoxy(posH,-halfY + 7);
+
+        posH+= halfX;
+        if(posH > pMin && posH <= pMax ) textcolor(52);
+        
+        printf("@");
 
     }else{
 
-        gotoxy(-halfX + 10 - offset/2 + *i + 7,-halfY + 7);
-            printf(" ");
+        posH = -halfX + 10 - offset/2 + *i + 7;
+        gotoxy(posH,-halfY + 7);
+        printf(" ");
 
         *i = 0;
 
     }
 
-
+    textcolor(7);
     return(*i);
 
 

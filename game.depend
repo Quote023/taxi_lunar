@@ -15,11 +15,15 @@
 
 1572704360 e:\_projetos\poli\lpi\fusca_lunar\crctrl.h
 
-1572823297 source:e:\_projetos\poli\lpi\taxi_lunar\crctrl.c
+1574896863 source:e:\_projetos\poli\lpi\taxi_lunar\crctrl.c
+	<stdio.h>
+	<stdlib.h>
 	<windows.h>
 	<math.h>
+	<string.h>
+	"crctrl.h"
 
-1573403605 source:e:\_projetos\poli\lpi\taxi_lunar\game.c
+1574897732 source:e:\_projetos\poli\lpi\taxi_lunar\game.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -28,12 +32,13 @@
 	"ascii.h"
 	"crctrl.h"
 	"stars.h"
+	"bullets.h"
 
-1573402209 e:\_projetos\poli\lpi\taxi_lunar\crctrl.h
+1574896855 e:\_projetos\poli\lpi\taxi_lunar\crctrl.h
 
-1572720022 source:e:\_projetos\poli\lpi\taxi_lunar\tempcoderunnerfile.c
+1574860190 source:e:\_projetos\poli\lpi\taxi_lunar\tempcoderunnerfile.c
 
-1572905706 source:e:\_projetos\poli\lpi\taxi_lunar\main.c
+1574861811 source:e:\_projetos\poli\lpi\taxi_lunar\main.c
 	<stdio.h>
 	<locale.h>
 	<stdlib.h>
@@ -43,19 +48,21 @@
 	"crctrl.h"
 	"game.h"
 	"ascii.h"
+	"car.h"
+	"stars.h"
 
-1572720252 e:\_projetos\poli\lpi\taxi_lunar\game.h
+1574896955 e:\_projetos\poli\lpi\taxi_lunar\game.h
 
-1573332176 e:\_projetos\poli\lpi\taxi_lunar\ascii.h
+1574166427 e:\_projetos\poli\lpi\taxi_lunar\ascii.h
 	<math.h>
 
-1573403477 source:e:\_projetos\poli\lpi\taxi_lunar\ascii.c
+1574897689 source:e:\_projetos\poli\lpi\taxi_lunar\ascii.c
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	"crctrl.h"
 
-1573402276 source:e:\_projetos\poli\lpi\taxi_lunar\stars.c
+1574896394 source:e:\_projetos\poli\lpi\taxi_lunar\stars.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -63,14 +70,15 @@
 	"stars.h"
 	<windows.h>
 
-1573383814 e:\_projetos\poli\lpi\taxi_lunar\stars.h
+1574860190 e:\_projetos\poli\lpi\taxi_lunar\stars.h
 
-1573403508 source:e:\_projetos\poli\lpi\taxi_lunar\car.c
+1574896722 source:e:\_projetos\poli\lpi\taxi_lunar\car.c
 	<stdio.h>
 	<stdlib.h>
+	<windows.h>
 	"crctrl.h"
 
-1573329658 e:\_projetos\poli\lpi\taxi_lunar\car.h
+1574902865 e:\_projetos\poli\lpi\taxi_lunar\car.h
 
 1574340116 source:c:\users\rayhene\downloads\taxi_lunar-master(2)\taxi_lunar-master\main.c
 	<stdio.h>
@@ -147,4 +155,14 @@
 	"crctrl.h"
 	"stars.h"
 	<windows.h>
+
+1574895844 source:e:\_projetos\poli\lpi\taxi_lunar\bullets.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"crctrl.h"
+	"stars.h"
+	<windows.h>
+
+1574860190 e:\_projetos\poli\lpi\taxi_lunar\bullets.h
 

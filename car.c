@@ -18,6 +18,49 @@
     }
 //
 
+int movCar(int i)
+{
+    short posH,pMax,pMin;
+    const char *car[] = {
+      //\u2587\u2587
+      "(-) (-)",
+      "(/) (/)",
+      "(|) (|)",
+      "(\\) (\\)"
+      };
+
+    if(i == 0)
+      setGlobal();
+
+    pMax = halfX + halfX/1.5f;
+    pMin = halfX - halfX/1.5f + 1;
+
+    
+    posH = -halfX + i - offset/2;
+    posH+= halfX;
+        if(posH >= pMin && posH <= pMax ) textcolor(63); 
+          else textcolor(7);
+    posH-= halfX;
+
+
+      gotoxy(posH,-halfY + 7);
+      printf (" LULAo ");
+      gotoxy(posH,-halfY + 6);
+      printf ("%s",car[i%3]);
+      Sleep(50);
+      gotoxy(posH,-halfY + 7);
+      posH += halfX;
+      if(posH >= pMin && posH <= pMax ){ if(rand()% 100 < 15) textcolor(34); else textcolor(63);} else textcolor(7);
+      printf("   ");
+      if(posH >= pMin && posH <= pMax ){ if(rand()% 100 < 15) textcolor(34); else textcolor(63);} else textcolor(7);
+      printf("   ");
+      posH -= halfX;
+      gotoxy(posH,-halfY + 6);
+      printf("       ");
+
+
+  return 0;
+}
 
 
 int jump(int *h, int i)
