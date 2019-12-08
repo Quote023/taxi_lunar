@@ -39,7 +39,7 @@ void salvarRanking()
 void imprimirRanking()
 {
     ScreenInfo scr = *getScreen();
-    unsigned short  halfX = scr.X/2, halfY = scr.Y/2;
+    unsigned short halfY = scr.Y/2;
 
     int i, j = 0;
     gotoxy(-9,halfY/2 - 4);
@@ -75,7 +75,7 @@ void verificarRanking()
 
     }
 
-    FILE *ranking;
+   // FILE *ranking;
 
 
 }

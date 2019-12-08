@@ -28,7 +28,8 @@ static void setGlobal()
 //
 
 /*Background(true = printar o chao/false = não printar)*/
-
+ static int background(int iFlag)
+ {
 
     static int i;
 
@@ -99,6 +100,8 @@ static void setGlobal()
 
 
 //Fumaça atrás do carro
+ static int smoke(int state)
+    {
 
 
             if(state % 2)
@@ -163,7 +166,7 @@ static void setGlobal()
  {
 
 
-    int i = 0,j = 1, y = 0, t = 0,n = 0,gIndex = 0,stopvar = 0;
+    int i = 0,j = 1, y = 0, t = 0,n = 0,gIndex = 0,stopvar = 0, timer = 30;
     char tecla = 0;
 
     const char array[] = "#####################################    #################    #################     ##################       ###############   ###############     ####################  ###############";
@@ -200,7 +203,10 @@ static void setGlobal()
 
         //  gotoxy(-50, -7);
         //  printf("%.2f km", cont);
+        if(i % scr.X == 0 && timer > 0)
+        timer -= 2;
 
+        Sleep(timer);
 
         if(kbhit())
         {
@@ -229,7 +235,8 @@ static void setGlobal()
                 turnWheel(wState);
                 smoke    (*wState);
 
-
+            }
+            else
             smoke(10);
 
 
@@ -252,9 +259,9 @@ static void setGlobal()
                 printf("%c",array[gIndex]);
                 if(halfX - n == CarX + 3 && y == 0 && array[gIndex] == ' ')
                 {
-                    system("cls");
-                    stopvar = 1;
-                    break;
+                    //system("cls");
+                    //stopvar = 1;
+                    //break;
                 }
                    
             }
@@ -285,11 +292,10 @@ static void setGlobal()
 
 
     return 0;
-}
+ }
 //
 
 /*Show Ranking*/
-
 static int ShowRanking(int *w)
 {
      int i;
@@ -369,15 +375,16 @@ int clsMenu()
 
 /*Menu(roda)*/
 //
-
+ int menu(int *wState)
+ {
     //Inicializa as variaveis Globais (primeria função a rodar).
         setGlobal();
     //Inicializa as variaveis Globais
 
     unsigned char sOption;
     static int i = 0,j = 0;
-
-
+    
+    const char *nome[] =
      {
 
         "    _____ _  __  _____",
