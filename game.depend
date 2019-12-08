@@ -166,3 +166,97 @@
 
 1574860190 e:\_projetos\poli\lpi\taxi_lunar\bullets.h
 
+1575807972 source:c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\ascii.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"crctrl.h"
+
+1575807972 c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\crctrl.h
+
+1575807972 source:c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\bullets.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"crctrl.h"
+	"stars.h"
+	<windows.h>
+
+1575807972 c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\stars.h
+
+1575807972 source:c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\car.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"crctrl.h"
+
+1575807972 source:c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\crctrl.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<math.h>
+	<string.h>
+	"crctrl.h"
+
+1575821742 source:c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\game.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<windows.h>
+	"game.h"
+	"car.h"
+	"ascii.h"
+	"crctrl.h"
+	"stars.h"
+	"bullets.h"
+	"ranking.h"
+
+1575807972 c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\game.h
+
+1575807972 c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\car.h
+
+1575807972 c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\ascii.h
+	<math.h>
+
+1575807972 c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\bullets.h
+
+1575814043 source:c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\main.c
+	<stdio.h>
+	<locale.h>
+	<stdlib.h>
+	<conio.h>
+	<math.h>
+	<windows.h>
+	"crctrl.h"
+	"game.h"
+	"ascii.h"
+	"car.h"
+	"stars.h"
+	"ranking.h"
+
+1575807972 source:c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\stars.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"crctrl.h"
+	"stars.h"
+	"time.h"
+	<windows.h>
+
+1575807972 source:c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\tempcoderunnerfile.c
+
+1575821928 c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\ranking.h
+
+1575823351 source:c:\users\rayhene\downloads\taxi_lunar-master(3)\taxi_lunar-master\ranking.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<windows.h>
+	"game.h"
+	"car.h"
+	"ascii.h"
+	"crctrl.h"
+	"stars.h"
+	"bullets.h"
+	"ranking.h"
+

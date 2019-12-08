@@ -9,13 +9,13 @@
 #include "ascii.h"
 #include "car.h"
 #include "stars.h"
-
+#include "ranking.h"
 
 int main(void)
 {
    // setlocale(LC_ALL, "");
-    int wState = 0; 
-    
+    int wState = 0;
+
     showConsoleCursor(0);
     consoleInfo('s');
     menu(&wState);
