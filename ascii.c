@@ -34,8 +34,8 @@ int elipse(short X,short Y,char fill)
 {
 
     ScreenInfo      scr     = *getScreen();
-    //unsigned short  halfX   =      scr.X/2,
-    //                halfY   =      scr.Y/2;
+    unsigned short  halfX   =      scr.X/2,
+                    halfY   =      scr.Y/2;
     unsigned short  offset  =   scr.X < 92
                             ?            8
                             :            0;

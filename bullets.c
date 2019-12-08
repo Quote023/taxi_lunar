@@ -30,22 +30,25 @@ int bullet(int *i)
 
         posH = -halfX + 10 - offset/2 + *i + 7;
         gotoxy(posH,-halfY + 7);
-        
+
         posH+= halfX;
-        if(posH > pMin && posH <= pMax ) 
-            if(rand()% 100 < 30) textcolor(34);  
+        if(posH > pMin && posH <= pMax )
+        {
+            if(rand()% 100 < 30) textcolor(34);
                 else textcolor(52);
-                
+        }
+
+
         printf(" ");
-        
+
         ++*i;
-        
+
         posH = -halfX + 10 - offset/2 + *i + 7;
         gotoxy(posH,-halfY + 7);
 
         posH+= halfX;
         if(posH > pMin && posH <= pMax ) textcolor(52);
-        
+
         printf("@");
 
     }else{

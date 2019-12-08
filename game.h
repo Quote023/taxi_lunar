@@ -2,6 +2,6 @@
 #define GAME_H_INCLUDED
 
 int menu(int *wState);
-int jogo(int *wState);
+//int jogo(int *wState);
 
 #endif

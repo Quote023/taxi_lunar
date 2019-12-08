@@ -12,7 +12,7 @@
 //Variaveis Globais;
     ScreenInfo scr;
     unsigned short halfX,halfY,offset;
-
+    int CarX,CarY;//X do Carro e Y da roda do carro;
 
     static void setGlobal()
     {
@@ -65,10 +65,12 @@
         }
     //Animação Caro
     
+    CarX = -halfX + 10 - offset/2;
+    CarY = -halfY + 6;
     //CARRROOOOOOOOOO
-        gotoxy(-halfX + 10 - offset/2,-halfY + 7);
+        gotoxy(CarX,CarY + 1);
         puts (car[0]);
-        gotoxy(-halfX + 10 - offset/2,-halfY + 6);
+        gotoxy(CarX,CarY);
         puts (car[1]);
     //CARRROOOOOOOOOO
 
@@ -94,19 +96,19 @@
 
             if(state % 2)
             {
-                gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
+                gotoxy(CarX - 3,CarY);
                 printf("  o");
 
             }
             else
             {
-                gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
+                gotoxy(CarX - 3,CarY);
                 printf(" O ");
 
             }
             if(state % 3 == 0)
             {
-                gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
+                gotoxy(CarX - 3,CarY);
                 printf("0  ");
 
 
@@ -114,7 +116,7 @@
             if(state % 6 == 0)
             {
 
-                gotoxy(-halfX + 10 - offset/2 - 5,-halfY + 7);
+                gotoxy(CarX - 5,CarY + 1);
                 printf("o ");
                 crmove(-1,-1);
                 printf("0");
@@ -125,10 +127,10 @@
             {
                 if(state == 10)
                 {
-                    gotoxy(-halfX + 10 - offset/2 - 3,-halfY + 6);
+                    gotoxy(CarX - 3,CarY);
                     printf("   ");
                 }
-                gotoxy(-halfX + 10 - offset/2 - 5,-halfY + 7);
+                gotoxy(CarX - 5,CarY + 1);
                 printf("  ");
                 crmove(-1,-1);
                 printf("  ");
@@ -142,12 +144,12 @@
 //
 
 /*jogo(roda)*/
- int jogo(int *wState)
+ static int jogo(int *wState)
  {
 
-    int i = 0,j = 1, y = 0, t = 0,n = 0,gIndex = 0;
+    int i = 0,j = 1, y = 0, t = 0,n = 0,gIndex = 0,stopvar = 0;
     char tecla = 0;
-    const char array[] = "#####################################      ###############      ###############       ###############       ###############   ###############      ####################################";
+    const char array[] = "#####################################    #################    #################     ##################       ###############   ###############     ####################  ###############";
 
 
 
@@ -166,7 +168,7 @@
     //
    
 
-    while(1)
+    while(!stopvar)
     {
         // gotoxy(-58, -7);
         // printf("score: ");
@@ -194,7 +196,7 @@
         }
 
 
-        if( i % 20 == 0)
+        if( i % 5 == 0)
         estrelas ();
 
         if(t > 0)
@@ -219,13 +221,18 @@
 
             for(n=0; n< j; ++n)
             {
-
-                gotoxy(halfX - n,-halfY + 5);
+                gotoxy(halfX - n,CarY - 1); //Vai pro final da tela 
                 gIndex = n - i >= 0 ? n-i : n-i + scr.X;
                  if(gIndex < 0)
                     {i = 0; n = 0; gIndex = 0;}
                 printf("%c",array[gIndex]);
-
+                if(halfX - n == CarX + 3 && y == 0 && array[gIndex] == ' ')
+                {
+                    system("cls");
+                    stopvar = 1;
+                    break;
+                }
+                   
             }
 
                if(j < scr.X)
@@ -257,7 +264,7 @@
  }
 //
 
-/**/
+/*Show Ranking*/
  static int ShowRanking(int *w)
  {
      int i;
@@ -295,6 +302,7 @@
  {
 
     int i;
+    int optionX = -10 + offset;
 
     //Nome
         gotoxy(-12 + offset, halfY/1.5f + 1);
@@ -307,11 +315,11 @@
 
     //Seleção
         textcolor(63);
-        gotoxy(-10 + offset,-1);
+        gotoxy(optionX,-1);
         printf("                    ");
-        gotoxy(-10 + offset,-2);
+        gotoxy(optionX,-2);
         printf("                    ");
-        gotoxy(-10 + offset,-3);
+        gotoxy(optionX,-3);
         printf("                    ");
     //
 
@@ -336,7 +344,7 @@
     unsigned char sOption;
     static int i = 0,j = 0;
 
-    static const char *nome[] =
+     const char *nome[] =
      {
 
         "    _____ _  __  _____",

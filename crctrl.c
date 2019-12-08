@@ -1,18 +1,18 @@
 /*
   Biblioteca p/ controle do cursor
-  V 101119
+  V 081219
+  Apenas Windows;
 */
 #include <stdio.h>
-#include <stdlib.h>
 #include <windows.h>
 #include <math.h>
-#include <string.h>
 #include "crctrl.h"
 
 //Tamanho minimo da tela
   #define minY 44
   #define minX 60
 /**/
+
 
 /*struct ScreenInfo
   Guarda as informações da tela;*/
@@ -55,8 +55,8 @@
 /**/
   
 /* Console Info(char Mode);
-  X -> TamanhoMax em X,
-  Y -> Tamanho Max em Y,
+  X -> TamanhoMax em X,  [Se possivel usar getScreen]
+  Y -> Tamanho Max em Y, [Se possivel usar getScreen]
   H -> Horizontal: Pos Atual em X (Independente do Centro),
   V -> Vertical:   Pos Atual em Y (Independente do Centro),
   S -> Setup:      Responsividade: Ajusta o tamanho da tela e do Buffer p/ tira as barras de rolagem. Chamar pelo menos no inicio.
@@ -76,7 +76,6 @@
     static    int              flag; //-11 caso a diagonal mude;
     short              r       = -1; //Variavel de retorno;
     char               cmd[30] = ""; //Comando do CMD p/ mudar o tamanho da tela;
-    char               num[04] = ""; //String Temporária p/ sprintf;
     
   /*Variaveis*/
     
@@ -177,17 +176,12 @@
             scrInfo.Y =  abs(scrSize.Bottom  - scrSize.Top   + 1);
             scrInfo.D = sqrt(pow(scrInfo.X,2) + pow(scrInfo.Y,2));;
             setScreen(scrInfo);
-            //atualizar Struct
+          //atualizar Struct
 
           //Concatena comando pra ser usado no console
-            strcat(cmd,"Mode con: cols=");
-            sprintf(num,"%d",scrInfo.X);
-            strcat(cmd,num);
-            strcat(cmd," lines=");
-            sprintf(num,"%d",scrInfo.Y);
-            strcat(cmd,num);
+            sprintf(cmd,"Mode con: cols=%d lines=%d",scrInfo.X,scrInfo.Y);
             system(cmd);
-
+          //
           
                       
           
