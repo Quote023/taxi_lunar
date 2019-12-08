@@ -215,7 +215,7 @@
 
 
 
-
+        ///PRECISA DE OTIMIZAÇÃO vvvv
 
             for(n=0; n< j; ++n)
             {
@@ -232,10 +232,7 @@
                 j+=1;
 
 
-           // }
-
-
-            //Sleep(100);
+        ///PRECISA DE OTIMIZAÇÃO ^^^^^^^^^
 
 
             if(consoleInfo('C') == -10) //Caso o tamanho mude
