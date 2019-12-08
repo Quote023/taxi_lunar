@@ -54,6 +54,13 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="ranking.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="ranking.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="stars.c">
 			<Option compilerVar="CC" />
 		</Unit>
