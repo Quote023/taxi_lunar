@@ -3,11 +3,7 @@
 #include <conio.h>
 #include <windows.h>
 #include "game.h"
-#include "car.h"
-#include "ascii.h"
 #include "crctrl.h"
-#include "stars.h"
-#include "bullets.h"
 #include "ranking.h"
 
 void lerRanking()
