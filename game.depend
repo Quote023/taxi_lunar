@@ -28,7 +28,7 @@
 	<math.h>
 	"crctrl.h"
 
-1576102175 source:d:\downloads\taxi_lunar-master\taxi_lunar-master\game.c
+1576105871 source:d:\downloads\taxi_lunar-master\taxi_lunar-master\game.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -37,7 +37,6 @@
 	"car.h"
 	"ascii.h"
 	"crctrl.h"
-	"bullets.h"
 	"ranking.h"
 
 1576101728 d:\downloads\taxi_lunar-master\taxi_lunar-master\game.h
@@ -56,7 +55,7 @@
 	"crctrl.h"
 	"game.h"
 
-1576100913 source:d:\downloads\taxi_lunar-master\taxi_lunar-master\ranking.c
+1576105795 source:d:\downloads\taxi_lunar-master\taxi_lunar-master\ranking.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>

@@ -41,12 +41,16 @@ void imprimirRanking()
 
     int i, j = 0;
     gotoxy(-9,halfY/2 - 4);
-    printf("Nome \t    Pontuacao\n");
+    printf("Nome");
+    gotoxy(1,halfY/2 - 4);
+    printf("Pontuacao");
 
     for(i=0; i < N; i++)
     {
         gotoxy(-9,halfY/2 - 5 - j);
-        printf("%.5s\t     %.2f\n", jogadoresRanking[i].nome, jogadoresRanking[i].pontuacao);
+        printf("%.5s", jogadoresRanking[i].nome);
+        gotoxy(2,halfY/2 - 5 - j);
+        printf("%.2f", jogadoresRanking[i].pontuacao);
         j++;
     }
 

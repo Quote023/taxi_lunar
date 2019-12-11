@@ -6,7 +6,6 @@
 #include "car.h"
 #include "ascii.h"
 #include "crctrl.h"
-#include "bullets.h"
 #include "ranking.h"
 
 //Variaveis Globais;
@@ -168,6 +167,8 @@ static int ShowRanking(int *w)
 
     printf("RANKING GERAL\n");
 
+
+    gotoxy(-7,halfY/2 - 4);
     imprimirRanking();
 
     for(i = 10; i < scr.X - 10; i += 2)
