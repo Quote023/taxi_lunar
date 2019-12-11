@@ -21,7 +21,7 @@
 	<math.h>
 	"crctrl.h"
 
-1575835237 source:e:\_projetos\poli\lpi\taxi_lunar\game.c
+1576085492 source:e:\_projetos\poli\lpi\taxi_lunar\game.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -65,7 +65,7 @@
 
 1575834398 e:\_projetos\poli\lpi\taxi_lunar\stars.h
 
-1575834398 source:e:\_projetos\poli\lpi\taxi_lunar\car.c
+1576085373 source:e:\_projetos\poli\lpi\taxi_lunar\car.c
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
@@ -255,7 +255,7 @@
 
 1575834398 e:\_projetos\poli\lpi\taxi_lunar\ranking.h
 
-1575835332 source:e:\_projetos\poli\lpi\taxi_lunar\ranking.c
+1576080707 source:e:\_projetos\poli\lpi\taxi_lunar\ranking.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>

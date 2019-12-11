@@ -8,14 +8,18 @@
 
 void lerRanking()
 {
-    int i;
+    int i,j = 1;
     char nome[5], pontuacao[20];
-    FILE *ranking = fopen("ranking.txt", "r+");
-    fscanf(ranking,"%s \t %s\n",nome,pontuacao);
+    FILE *ranking = fopen("ranking.bin", "rb+");
+    //fscanf(ranking,"%s \t %s\n",nome,pontuacao);
 
     for(i = 0; i < N; i++)
     {
-        fscanf(ranking, "%s \t %f\n",jogadoresRanking[i].nome,&jogadoresRanking[i].pontuacao);
+       //j =
+        fread(&jogadoresRanking[i],sizeof(jogadoresRanking),1,ranking);
+        //if(j == 0)
+        //break;
+        //fscanf(ranking, "%s \t %f\n",jogadoresRanking[i].nome,&jogadoresRanking[i].pontuacao);
     }
 
     fclose(ranking);
@@ -25,12 +29,13 @@ void lerRanking()
 void salvarRanking()
 {
     int i;
-    FILE *ranking = fopen("ranking.txt", "w+");
-    fprintf(ranking,"Nome \t Pontuacao\n");
+    FILE *ranking = fopen("ranking.bin", "wb+");
+    //fprintf(ranking,"Nome \t Pontuacao\n");
 
     for(i = 0; i < N; i++)
     {
-        fprintf(ranking, "%s \t %f\n",jogadoresRanking[i].nome,jogadoresRanking[i].pontuacao);
+        fwrite(&jogadoresRanking[i],sizeof(jogadoresRanking),1,ranking);
+        //fprintf(ranking, "%s \t %f\n",jogadoresRanking[i].nome,jogadoresRanking[i].pontuacao);
     }
 
     fclose(ranking);
@@ -43,14 +48,13 @@ void imprimirRanking()
 
     int i, j = 0;
     gotoxy(-9,halfY/2 - 4);
-    printf("Nome \tPontuacao\n");
+    printf("Nome \t  Pontuacao\n");
 
     for(i=0; i < N; i++)
     {
         gotoxy(-9,halfY/2 - 5 - j);
-        printf("%s \t%.2f\n", jogadoresRanking[i].nome, jogadoresRanking[i].pontuacao);
+        printf("%.4s\t     %.2f\n", jogadoresRanking[i].nome, jogadoresRanking[i].pontuacao);
         j++;
-
     }
 
 }

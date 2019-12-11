@@ -35,10 +35,10 @@ int movCar(int i)
     pMax = halfX + halfX/1.5f;
     pMin = halfX - halfX/1.5f + 1;
 
-    
+
     posH = -halfX + i - offset/2;
-    posH+= halfX;
-        if(posH >= pMin && posH <= pMax ) textcolor(63); 
+    posH += halfX;
+        if(posH >= pMin && posH <= pMax ) textcolor(63);
           else textcolor(7);
     posH-= halfX;
 
@@ -67,20 +67,20 @@ int jump(int *h, int i)
 {
 
     static int down;
-    
+
     if(*h != 0)
     {
       gotoxy(-halfX + 10 - offset/2,-halfY + 5 + *h);
       printf("       ");  //Espaço vazio onde era a roda
       gotoxy(-halfX + 10 - offset/2,-halfY + 6 + *h);
-      printf("(|) (|)"); //Printa roda em cima 
+      printf("(|) (|)"); //Printa roda em cima
       gotoxy(-halfX + 10 - offset/2,-halfY + 7 + *h);
       printf(" LULAo ");
       gotoxy(-halfX + 10 - offset/2,-halfY + 8 + *h);
       printf("       ");
     }
-      
-      
+
+
       if(*h == 7)
       {
         down = 1;
@@ -97,11 +97,11 @@ int jump(int *h, int i)
             printf("       ");
             gotoxy(-halfX + 10 - offset/2,-halfY + 7 + *h);
             printf(" LULAo ");
-            down = 0; 
+            down = 0;
         }
-        
 
-     
+
+
     //}
     return 0;
 }
@@ -114,10 +114,10 @@ int turnWheel(int *i)
 
     textcolor(7);
 
-    
+
   //gotoxy(-halfX + 10 - 4,-halfY + 6);
   //printf("           ");
-  
+
   if(!*i) setGlobal();
 
   if(*i == 0 || *i == 4)

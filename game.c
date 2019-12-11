@@ -23,7 +23,7 @@ static void setGlobal()
         halfX = scr.X/2;
         halfY = scr.Y/2;
         offset = scr.X < 92 ? 8 : 0;
-    
+
 }
 //
 
@@ -80,16 +80,11 @@ static void setGlobal()
         puts (car[1]);
     //CARRROOOOOOOOOO
 
-
-
-
-
     //Painel
         gotoxy(-halfX + 1,-halfY + 3);
         textcolor(102);//dourado
         drawRect(scr.X,4,' ');
         textcolor(7);//branco
-
     //Painel
 
 
@@ -97,6 +92,30 @@ static void setGlobal()
 
 }
 //
+
+//Gameover
+
+static int GameOver()
+{
+    gotoxy(-halfX/2,halfY/2);
+    textcolor(102);
+    drawRect(halfX,halfY,' ');
+    textcolor(7);
+
+    gotoxy(-5,5);
+    printf("Game Over");
+    gotoxy(-15,4);
+    printf("Digite suas iniciais piloto:");
+    gotoxy(-4,3);
+    scanf("%s",jogadorAtual.nome);
+    //jogadorAtual.pontuacao = 300.5f;
+    verificarRanking();
+    salvarRanking();
+    return 0;
+}
+
+
+
 
 
 //Fumaça atrás do carro
@@ -166,14 +185,18 @@ static void setGlobal()
  {
 
 
-    int i = 0,j = 1, y = 0, t = 0,n = 0,gIndex = 0,stopvar = 0, timer = 30;
+    int i = 0,j = 1, y = 0, t = 0,n = 0,b = 0,gIndex = 0,stopvar = 0, timer = 30;
+    int obsX,pMax,pMin;
+    float pont = 0.0f;
+    //b = variável para o movimento  do obstáculo
     char tecla = 0;
+
 
     const char array[] = "#####################################    #################    #################     ##################       ###############   ###############     ####################  ###############";
 
 
 
-    //float cont = 0;
+
 
 
     //Acelerção gradual
@@ -206,7 +229,7 @@ static void setGlobal()
         if(i % scr.X == 0 && timer > 0)
         timer -= 2;
 
-        Sleep(timer);
+        Sleep(15);
 
         if(kbhit())
         {
@@ -218,7 +241,8 @@ static void setGlobal()
 
         }
 
-
+        if(!(i % 2))
+            pont++;
 
         if( i % 5 == 0)
         estrelas ();
@@ -239,6 +263,58 @@ static void setGlobal()
             else
             smoke(10);
 
+        //obstaculos aqui
+
+        obsX = halfX -3 - b;
+        pMax = halfX + halfX/1.5f;
+        pMin = halfX - halfX/1.5f + 1;
+
+        //if(obsX < halfX + halfX/1.5f && obsX > halfX - halfX/1.5f + 1)
+        //{
+
+         //     if(rand()% 100 < 30) textcolor(34);
+         //       else textcolor(52);
+        //}else
+        //    textcolor(7);
+        obsX += halfX;
+         if(obsX >= pMin && obsX <= pMax ){ if(rand()% 100 < 15) textcolor(34); else textcolor(63);} else textcolor(7);
+        obsX -= halfX;
+
+        gotoxy(obsX,-halfY + 6);
+        printf("$$  ");
+
+        gotoxy(obsX,-halfY + 7);
+        printf("$$  ");
+
+        textcolor(7);
+
+        b++;
+
+        if(obsX == CarX+7 && y == 0)
+        {
+         jogadorAtual.pontuacao = pont;
+         GameOver();
+         stopvar = 1;
+         break;
+        }
+
+        if(obsX < CarX+6 && y == 0 ||obsX <= -halfX + 10 - offset/2 + t + 7)
+        {
+            obsX += halfX;
+            if(obsX >= pMin && obsX <= pMax ){ if(rand()% 100 < 15) textcolor(34); else textcolor(63);} else textcolor(7);
+            obsX -= halfX;
+            t = 0;
+            gotoxy(halfX -3 - b,-halfY + 7);
+            printf("    ");
+            gotoxy(halfX -3 - b,-halfY + 6);
+            printf("    ");
+            b = 0;
+            textcolor(7);
+
+
+        }
+
+
 
 
 
@@ -247,7 +323,7 @@ static void setGlobal()
             for(n=0; n< j; ++n)
             {
 
-                gotoxy(halfX - n,CarY - 1); //Vai pro final da tela 
+                gotoxy(halfX - n,CarY - 1); //Vai pro final da tela
                 gIndex = n - i >= 0 ? n-i : n-i + scr.X;
                  if(gIndex < 0)
 
@@ -259,11 +335,12 @@ static void setGlobal()
                 printf("%c",array[gIndex]);
                 if(halfX - n == CarX + 3 && y == 0 && array[gIndex] == ' ')
                 {
-                    //system("cls");
-                    //stopvar = 1;
-                    //break;
+                    jogadorAtual.pontuacao = pont;
+                    GameOver();
+                    stopvar = 1;
+                    break;
                 }
-                   
+
             }
 
                if(j < scr.X)
@@ -282,6 +359,8 @@ static void setGlobal()
                 return jogo(wState);    //Recomeça o jogo
             }
 
+            gotoxy(-halfX + 6,-halfY + 1);
+            printf("SCORE: %.2f",pont);
 
             i+= 1;
 
@@ -327,7 +406,7 @@ static int ShowRanking(int *w)
 
 
      return 0;
- 
+
 }
 //
 
@@ -383,7 +462,7 @@ int clsMenu()
 
     unsigned char sOption;
     static int i = 0,j = 0;
-    
+
     const char *nome[] =
      {
 
@@ -439,7 +518,7 @@ int clsMenu()
                     textcolor(7);
                     estrelas();
 
-                
+
             }
             else
                 {
@@ -480,8 +559,28 @@ int clsMenu()
         ShowRanking(wState);
         break;
     case '3':
-        system("cls");
-        printf("creditosss");
+        gotoxy(-halfX/2,halfY/2);
+        textcolor(102);
+        drawRect(halfX,halfY,' ');
+        textcolor(7);
+
+        gotoxy(-5,8);
+        printf("Creditos");
+        gotoxy(-10,7);
+        printf("Primeiramente: DEUS");
+        gotoxy(-11,6);
+        printf("Segundamente:   Joabe");
+        gotoxy(-19,5);
+        printf("Terceiramente: Essa equipe maravilinda");
+        gotoxy(-4,1);
+        printf("Equipe:");
+        gotoxy(-11,0);
+        printf("Design Grafico: Alex");
+        gotoxy(-8,-1);
+        printf("Um monte de coisa:");
+        gotoxy(-12,-2);
+        printf("Sarah,Mariana e Rayhene");
+        getche();
         break;
     case '4':
         system("cls");
@@ -494,6 +593,6 @@ int clsMenu()
     }
 
     return 0;
- 
+
 }
 
