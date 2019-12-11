@@ -1,4 +1,3 @@
-/*TO-DO: COLOCAR OS TEXTOS DO LOGO/CARRINHO AQUI*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -7,8 +6,6 @@
 int drawRect(int X,int Y,char fill)
 {
     int i,j;
-
-    //gotoxy(-X/2,Y/2);
 
     for(i = 0; i < Y;++i)
     {

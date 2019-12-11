@@ -8,18 +8,12 @@
 
 void lerRanking()
 {
-    int i,j = 1;
-    char nome[5], pontuacao[20];
+    int i;
     FILE *ranking = fopen("ranking.bin", "rb+");
-    //fscanf(ranking,"%s \t %s\n",nome,pontuacao);
 
     for(i = 0; i < N; i++)
     {
-       //j =
         fread(&jogadoresRanking[i],sizeof(jogadoresRanking),1,ranking);
-        //if(j == 0)
-        //break;
-        //fscanf(ranking, "%s \t %f\n",jogadoresRanking[i].nome,&jogadoresRanking[i].pontuacao);
     }
 
     fclose(ranking);
@@ -30,12 +24,11 @@ void salvarRanking()
 {
     int i;
     FILE *ranking = fopen("ranking.bin", "wb+");
-    //fprintf(ranking,"Nome \t Pontuacao\n");
 
     for(i = 0; i < N; i++)
     {
         fwrite(&jogadoresRanking[i],sizeof(jogadoresRanking),1,ranking);
-        //fprintf(ranking, "%s \t %f\n",jogadoresRanking[i].nome,jogadoresRanking[i].pontuacao);
+
     }
 
     fclose(ranking);
@@ -48,12 +41,12 @@ void imprimirRanking()
 
     int i, j = 0;
     gotoxy(-9,halfY/2 - 4);
-    printf("Nome \t  Pontuacao\n");
+    printf("Nome \t    Pontuacao\n");
 
     for(i=0; i < N; i++)
     {
         gotoxy(-9,halfY/2 - 5 - j);
-        printf("%.4s\t     %.2f\n", jogadoresRanking[i].nome, jogadoresRanking[i].pontuacao);
+        printf("%.5s\t     %.2f\n", jogadoresRanking[i].nome, jogadoresRanking[i].pontuacao);
         j++;
     }
 
@@ -64,7 +57,7 @@ void verificarRanking()
 {
     int i,j;
 
-
+    //verifica se a pontuação do jogador atual é maior do que a dos que já jogaram, se sim move para a posição adequada
     for(i = 0; i < N; i++)
     {
         if(jogadorAtual.pontuacao >= jogadoresRanking[i].pontuacao )
@@ -79,7 +72,7 @@ void verificarRanking()
 
     }
 
-   // FILE *ranking;
+
 
 
 }

@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <conio.h>
 #include "crctrl.h"
-#include "stars.h"
 #include <windows.h>
 
 int bullet(int *i)

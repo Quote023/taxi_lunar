@@ -38,7 +38,6 @@
 		<Unit filename="bullets.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="bullets.h" />
 		<Unit filename="car.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -62,10 +61,6 @@
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="stars.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="stars.h" />
-		<Unit filename="tempCodeRunnerFile.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

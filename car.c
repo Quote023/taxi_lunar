@@ -102,7 +102,7 @@ int jump(int *h, int i)
 
 
 
-    //}
+
     return 0;
 }
 
@@ -115,8 +115,6 @@ int turnWheel(int *i)
     textcolor(7);
 
 
-  //gotoxy(-halfX + 10 - 4,-halfY + 6);
-  //printf("           ");
 
   if(!*i) setGlobal();
 
